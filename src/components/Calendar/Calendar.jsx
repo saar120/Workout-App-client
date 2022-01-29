@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { isEqual } from "date-fns";
 import { Calendar } from "react-calendar";
 import { CalendarContainer } from "./Calendar.styled";
