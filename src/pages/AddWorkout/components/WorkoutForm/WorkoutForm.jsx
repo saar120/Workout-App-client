@@ -9,14 +9,11 @@ export default function WorkoutForm() {
   const [exercises, setExercises] = useRecoilState(exerciseState);
   const [exerciseValue, setExerciseValue] = useState("");
 
-  const renderExercises = () => {
-    return exercises.map((exercise, index) => {
-      return <ExerciseForm key={exercise.id} exercise={exercise} exIndex={index} />;
-    });
-  };
+  const renderExercises = () =>
+    exercises.map((exercise, index) => <ExerciseForm key={exercise.id} exercise={exercise} exIndex={index} />);
 
   const addExercise = () => {
-    const newExercise = { id: uuid(), name: exerciseValue, sets: [{ id: uuid(), reps: 0, weight: 0 }] };
+    const newExercise = { id: uuid(), name: exerciseValue, sets: [{ id: uuid(), reps: "", weight: "" }] };
     setExercises([...exercises, newExercise]);
     setExerciseValue("");
   };
@@ -29,7 +26,7 @@ export default function WorkoutForm() {
         variant="outlined"
         label="Exercise"
         value={exerciseValue}
-        onChange={(e) => setExerciseValue(e.target.value)}
+        onChange={({ target: { value } }) => setExerciseValue(value)}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
