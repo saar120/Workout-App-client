@@ -1,13 +1,12 @@
 import React from "react";
 import { RecoilRoot } from "recoil";
+import "./App.css";
 import AddWorkoutPage from "./pages/AddWorkout/AddWorkout.page";
 
 export default function App() {
   return (
-    <div>
-      <RecoilRoot>
-        <AddWorkoutPage />
-      </RecoilRoot>
-    </div>
+    <RecoilRoot>
+      <AddWorkoutPage />
+    </RecoilRoot>
   );
 }

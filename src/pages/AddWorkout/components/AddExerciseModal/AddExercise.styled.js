@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const ModalContainer = styled.div`
-  position: fixed;
   top: 50%;
+  position: fixed;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
@@ -11,7 +11,6 @@ const ModalContainer = styled.div`
   border-radius: 12px;
   display: flex;
   gap: 0.6rem;
-  justify-content: center;
   align-content: center;
   flex-direction: column;
   padding: 0.7rem;
