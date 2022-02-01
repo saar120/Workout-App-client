@@ -4,26 +4,28 @@ import exerciseState from "../../../../Recoil/atoms/exerciseAtom";
 import { v4 as uuid } from "uuid";
 import { WorkoutFormStyled } from "./WorkoutForm.styled";
 import ExerciseForm from "../ExerciseForm/ExerciseForm";
-import { TextField } from "@mui/material";
-import SearchBar from "../SearchBar/SearchBar";
+import { TextField, Button } from "@mui/material";
+import AddExerciseModal from "../AddExerciseModal/AddExerciseModal";
 export default function WorkoutForm() {
   const [exercises, setExercises] = useRecoilState(exerciseState);
-  const [exerciseValue, setExerciseValue] = useState("");
+  const [showAddExercise, setShowAddExercise] = useState(false);
 
   const renderExercises = () =>
     exercises.map((exercise, index) => <ExerciseForm key={exercise.id} exercise={exercise} exIndex={index} />);
 
-  const addExercise = () => {
-    const newExercise = { id: uuid(), name: exerciseValue, sets: [{ id: uuid(), reps: "", weight: "" }] };
+  const addExercise = (exercise) => {
+    const newExercise = { id: uuid(), name: exercise, sets: [{ id: uuid(), reps: "", weight: "" }] };
     setExercises([...exercises, newExercise]);
-    setExerciseValue("");
   };
 
   return (
-    <WorkoutFormStyled>
-      <TextField name="title" variant="outlined" label="Workout Name" fullWidth />
-      <SearchBar />
-      {exercises?.length > 0 && renderExercises()}
-    </WorkoutFormStyled>
+    <>
+      <WorkoutFormStyled>
+        <TextField name="title" variant="outlined" label="Workout Name" fullWidth />
+        <Button onClick={() => setShowAddExercise(true)}>Add Exercise</Button>
+        {exercises?.length > 0 && renderExercises()}
+      </WorkoutFormStyled>
+      {showAddExercise && <AddExerciseModal setShowAddExercise={setShowAddExercise} addExercise={addExercise} />}
+    </>
   );
 }
