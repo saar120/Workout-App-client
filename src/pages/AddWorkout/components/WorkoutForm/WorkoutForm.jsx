@@ -4,7 +4,8 @@ import exerciseState from "../../../../Recoil/atoms/exerciseAtom";
 import { v4 as uuid } from "uuid";
 import { WorkoutFormStyled } from "./WorkoutForm.styled";
 import ExerciseForm from "../ExerciseForm/ExerciseForm";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
+import { TextField } from "@mui/material";
+import SearchBar from "../SearchBar/SearchBar";
 export default function WorkoutForm() {
   const [exercises, setExercises] = useRecoilState(exerciseState);
   const [exerciseValue, setExerciseValue] = useState("");
@@ -21,22 +22,7 @@ export default function WorkoutForm() {
   return (
     <WorkoutFormStyled>
       <TextField name="title" variant="outlined" label="Workout Name" fullWidth />
-      <TextField
-        name="exercise"
-        variant="outlined"
-        label="Exercise"
-        value={exerciseValue}
-        onChange={({ target: { value } }) => setExerciseValue(value)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton edge="end" color="primary" onClick={addExercise}>
-                +
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
+      <SearchBar />
       {exercises?.length > 0 && renderExercises()}
     </WorkoutFormStyled>
   );
