@@ -7,7 +7,7 @@ import muscles from "../../../../../mock-data/muscles.json";
 function SearchBar({ addExercise, closeModal }) {
   const [category, setCategory] = useState("name");
   const [searchTerm, setSearchTerm] = useState("");
-  const [exercises, setExercises] = useState(data);
+  const [exercises] = useState(data);
 
   const handleSelect = ({ target: { value } }) => {
     setCategory(value);
