@@ -2,26 +2,33 @@ import React, { useState } from "react";
 import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { ResultsHolder, Result } from "./SearchBar.styled";
 import data from "../../../../../mock-data/exercises.json";
+import muscles from "../../../../../mock-data/muscles.json";
 
 function SearchBar({ addExercise, closeModal }) {
   const [category, setCategory] = useState("name");
-  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [exercises, setExercises] = useState(data);
 
   const handleSelect = ({ target: { value } }) => {
     setCategory(value);
+    setSearchTerm("");
   };
 
-  const handleFilter = ({ target: { value: searchTerm } }) => {
-    const filtered = data.filter((ex) => {
-      if (category === "name") {
-        return ex[category].toLowerCase().includes(searchTerm.toLowerCase());
-      }
-      if (category === "primaryMuscles") {
-        return ex[category].includes(searchTerm.toLowerCase());
-      }
-      return ex;
-    });
-    setFilteredData(filtered);
+  const handleSearchTerm = ({ target: { value } }) => {
+    setSearchTerm(value);
+  };
+
+  const renderFilteredExercises = () => {
+    if (!exercises) return;
+    const filtered =
+      category === "name"
+        ? data.filter((ex) => ex.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)
+        : data.filter((ex) => ex.primaryMuscles.join(" ").indexOf(searchTerm.toLowerCase()) !== -1);
+    return filtered.map((ex) => (
+      <Result onClick={() => exerciseClick(ex.name)} key={ex.name}>
+        {ex.name}
+      </Result>
+    ));
   };
 
   const exerciseClick = (exercise) => {
@@ -31,7 +38,6 @@ function SearchBar({ addExercise, closeModal }) {
 
   return (
     <>
-      <TextField name="exercise" variant="outlined" label="Search" onChange={handleFilter} />
       <FormControl>
         <InputLabel id="category">Search Category</InputLabel>
         <Select labelId="category" value={category} onChange={handleSelect} defaultValue="name" label="Search Category">
@@ -39,15 +45,22 @@ function SearchBar({ addExercise, closeModal }) {
           <MenuItem value="primaryMuscles">Muscle</MenuItem>
         </Select>
       </FormControl>
-      <ResultsHolder>
-        {filteredData?.map((ex) => {
-          return (
-            <Result onClick={() => exerciseClick(ex.name)} key={ex.name}>
-              {ex.name}
-            </Result>
-          );
-        })}
-      </ResultsHolder>
+      {category === "name" ? (
+        <TextField name="exercise" variant="outlined" label="Search" value={searchTerm} onChange={handleSearchTerm} />
+      ) : (
+        <FormControl>
+          <InputLabel id="muscle">Muscle</InputLabel>
+          <Select labelId="muscle" label="Muscle" value={searchTerm} onChange={handleSearchTerm}>
+            {muscles &&
+              muscles.map((muscle) => (
+                <MenuItem key={muscle} value={muscle}>
+                  {muscle}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+      )}
+      <ResultsHolder>{renderFilteredExercises()}</ResultsHolder>
     </>
   );
 }
