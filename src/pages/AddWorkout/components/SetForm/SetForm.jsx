@@ -1,11 +1,13 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import exerciseState from "../../../../Recoil/atoms/exerciseAtom";
+import produce from "immer";
 import { NumInput, TableCellStyled } from "./SetForm.styles";
-import { TableRow } from "@mui/material";
+import { TableRow, IconButton } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function SetForm({ set, onChange, exIndex, setIndex }) {
-  const exercises = useRecoilValue(exerciseState);
+  const [exercises, setExercises] = useRecoilState(exerciseState);
   let weightPlaceholder = "Weight";
   let repsPlaceholder = "Reps";
   if (setIndex !== 0) {
@@ -20,6 +22,14 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
     }
   };
 
+  const deleteSet = () => {
+    if (exercises[exIndex].sets.length <= 1) return;
+    const updatedExercises = produce(exercises, (draft) => {
+      draft[exIndex].sets.splice(setIndex, 1);
+    });
+    setExercises(updatedExercises);
+  };
+
   return (
     <TableRow>
       <TableCellStyled>{setIndex + 1}</TableCellStyled>
@@ -27,6 +37,7 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
         <NumInput
           type="text"
           label="Reps"
+          autoComplete="off"
           name="reps"
           autoFocus
           onKeyPress={checkValidKey}
@@ -41,12 +52,18 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
           type="text"
           pattern="[0-9]*"
           label="Weight"
+          autoComplete="off"
           name="weight"
           onKeyPress={checkValidKey}
           value={set.weight}
           placeholder={weightPlaceholder}
           onChange={onChange}
         />
+      </TableCellStyled>
+      <TableCellStyled>
+        <IconButton onClick={deleteSet}>
+          <CancelIcon color="secondary" />
+        </IconButton>
       </TableCellStyled>
     </TableRow>
   );

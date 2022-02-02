@@ -17,7 +17,6 @@ export default function AddWorkoutPage() {
 
   return (
     <AddWorkoutPageStyled>
-      <h1>Add Workout</h1>
       <Button variant="contained" onClick={addResetHandler}>
         {showWorkoutForm ? "Reset" : "Add Workout"}
       </Button>

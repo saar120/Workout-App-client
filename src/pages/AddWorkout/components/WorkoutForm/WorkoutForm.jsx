@@ -8,6 +8,7 @@ import { TextField, Button } from "@mui/material";
 import AddExerciseModal from "../AddExerciseModal/AddExerciseModal";
 export default function WorkoutForm() {
   const [exercises, setExercises] = useRecoilState(exerciseState);
+  const [workoutName, setWorkoutName] = useState("");
   const [showAddExercise, setShowAddExercise] = useState(false);
 
   const renderExercises = () =>
@@ -21,7 +22,14 @@ export default function WorkoutForm() {
   return (
     <>
       <WorkoutFormStyled>
-        <TextField name="title" variant="outlined" label="Workout Name" fullWidth />
+        <TextField
+          name="title"
+          variant="outlined"
+          label="Workout Name"
+          value={workoutName}
+          onChange={({ target: { value } }) => setWorkoutName(value)}
+          fullWidth
+        />
         <Button onClick={() => setShowAddExercise(true)}>Add Exercise</Button>
         {exercises?.length > 0 && renderExercises()}
       </WorkoutFormStyled>

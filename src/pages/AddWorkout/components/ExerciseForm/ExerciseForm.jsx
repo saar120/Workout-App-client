@@ -23,9 +23,10 @@ export default function ExerciseForm({ exercise, exIndex }) {
   const [exercises, setExercises] = useRecoilState(exerciseState);
 
   const removeExercise = () => {
-    const newExercise = [...exercises];
-    newExercise.splice(exIndex, 1);
-    setExercises(newExercise);
+    const updatedExercises = produce(exercises, (draft) => {
+      draft.splice(exIndex, 1);
+    });
+    setExercises(updatedExercises);
   };
 
   const renderSets = (set, setIndex) => {
@@ -63,9 +64,10 @@ export default function ExerciseForm({ exercise, exIndex }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell># Set</TableCell>
-              <TableCell>Reps</TableCell>
-              <TableCell>Weight (Kg)</TableCell>
+              <TableCell align="center"># Set</TableCell>
+              <TableCell align="center">Reps</TableCell>
+              <TableCell align="center">Weight (Kg)</TableCell>
+              <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{exercises[exIndex].sets.map(renderSets)}</TableBody>
