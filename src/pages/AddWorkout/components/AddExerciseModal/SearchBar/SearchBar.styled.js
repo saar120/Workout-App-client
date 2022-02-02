@@ -24,6 +24,7 @@ const Result = styled.div`
   color: #121616;
   background-color: #d4e9ed;
   border: 2px solid #495a5a;
+  cursor: pointer;
   &&:hover {
     border-color: #3891a6;
   }

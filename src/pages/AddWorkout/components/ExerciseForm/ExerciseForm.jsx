@@ -17,10 +17,12 @@ export default function ExerciseForm({ exercise, exIndex }) {
 
   const renderSets = (set, setIndex) => {
     const onChangeHandlerCB = onChangeHandler(exIndex, setIndex);
-    return <SetForm key={set.id} set={set} onChange={onChangeHandlerCB} />;
+    return <SetForm key={set.id} set={set} setIndex={setIndex} exIndex={exIndex} onChange={onChangeHandlerCB} />;
   };
 
   const addSet = () => {
+    const lastSet = exercises[exIndex].sets[exercises[exIndex].sets.length - 1];
+    if (!lastSet.reps || !lastSet.reps) return;
     const updatedExercises = produce(exercises, (draft) => {
       draft[exIndex].sets.push({ id: uuid(), reps: "", weight: "" });
     });
