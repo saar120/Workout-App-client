@@ -15,6 +15,8 @@ import {
   Table,
   Paper,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { ExerciseFormStyled, HeadContainer } from "./ExerciseForm.styles";
 import SetForm from "../SetForm/SetForm";
 
 export default function ExerciseForm({ exercise, exIndex }) {
@@ -33,7 +35,7 @@ export default function ExerciseForm({ exercise, exIndex }) {
 
   const addSet = () => {
     const lastSet = exercises[exIndex].sets[exercises[exIndex].sets.length - 1];
-    if (!lastSet.reps || !lastSet.reps) return;
+    if (!lastSet.weight || !lastSet.reps) return;
     const updatedExercises = produce(exercises, (draft) => {
       draft[exIndex].sets.push({ id: uuid(), reps: "", weight: "" });
     });
@@ -50,16 +52,18 @@ export default function ExerciseForm({ exercise, exIndex }) {
     };
 
   return (
-    <div>
-      <Typography variant="p">{exercise.name}</Typography>
-      <IconButton variant="contained" onClick={removeExercise}>
-        <span>X</span>
-      </IconButton>
+    <ExerciseFormStyled>
+      <HeadContainer>
+        <Typography variant="p">{exercise.name}</Typography>
+        <IconButton variant="contained" onClick={removeExercise}>
+          <CloseIcon />
+        </IconButton>
+      </HeadContainer>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell># Set</TableCell>
               <TableCell>Reps</TableCell>
               <TableCell>Weight (Kg)</TableCell>
             </TableRow>
@@ -67,9 +71,9 @@ export default function ExerciseForm({ exercise, exIndex }) {
           <TableBody>{exercises[exIndex].sets.map(renderSets)}</TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" fullWidth onClick={addSet}>
+      <Button variant="filled" fullWidth onClick={addSet}>
         Add Set
       </Button>
-    </div>
+    </ExerciseFormStyled>
   );
 }

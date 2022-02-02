@@ -1,8 +1,8 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import exerciseState from "../../../../Recoil/atoms/exerciseAtom";
-import { NumInput } from "./SetForm.styles";
-import { TableRow, TableCell } from "@mui/material";
+import { NumInput, TableCellStyled } from "./SetForm.styles";
+import { TableRow } from "@mui/material";
 
 export default function SetForm({ set, onChange, exIndex, setIndex }) {
   const exercises = useRecoilValue(exerciseState);
@@ -22,20 +22,21 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
 
   return (
     <TableRow>
-      <TableCell>{setIndex}</TableCell>
-      <TableCell>
+      <TableCellStyled>{setIndex + 1}</TableCellStyled>
+      <TableCellStyled>
         <NumInput
           type="text"
           label="Reps"
           name="reps"
+          autoFocus
           onKeyPress={checkValidKey}
           pattern="[0-9]*"
           placeholder={repsPlaceholder}
           value={set.reps}
           onChange={onChange}
         />
-      </TableCell>
-      <TableCell>
+      </TableCellStyled>
+      <TableCellStyled>
         <NumInput
           type="text"
           pattern="[0-9]*"
@@ -46,7 +47,7 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
           placeholder={weightPlaceholder}
           onChange={onChange}
         />
-      </TableCell>
+      </TableCellStyled>
     </TableRow>
   );
 }

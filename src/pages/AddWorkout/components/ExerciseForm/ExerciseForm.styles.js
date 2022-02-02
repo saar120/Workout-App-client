@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
-const SetsHolder = styled.div`
+const ExerciseFormStyled = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 1rem;
+  gap: 0.8rem;
+  width: clamp(300px, 30vw, 650px);
 `;
 
-export { SetsHolder };
+const HeadContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export { ExerciseFormStyled, HeadContainer };
