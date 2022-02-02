@@ -1,6 +1,6 @@
 import React from "react";
 import { RecoilRoot } from "recoil";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Styles/muiTheme";
 import Navbar from "./components/Navbar/Navbar";
@@ -14,10 +14,11 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Navbar />
-
-        <Routes>
-          <Route path={`${ROUTES.HOME}`} element={<AddWorkoutPage />} />
-        </Routes>
+        <Router>
+          <Routes>
+            <Route path={`${ROUTES.HOME}`} element={<AddWorkoutPage />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </RecoilRoot>
   );
