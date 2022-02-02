@@ -3,7 +3,18 @@ import { useRecoilState } from "recoil";
 import exerciseState from "../../../../Recoil/atoms/exerciseAtom";
 import produce from "immer";
 import { v4 as uuid } from "uuid";
-import { Typography, Button, IconButton } from "@mui/material";
+import {
+  Typography,
+  Button,
+  IconButton,
+  TableBody,
+  TableContainer,
+  TableRow,
+  TableHead,
+  TableCell,
+  Table,
+  Paper,
+} from "@mui/material";
 import SetForm from "../SetForm/SetForm";
 
 export default function ExerciseForm({ exercise, exIndex }) {
@@ -44,7 +55,18 @@ export default function ExerciseForm({ exercise, exIndex }) {
       <IconButton variant="contained" onClick={removeExercise}>
         <span>X</span>
       </IconButton>
-      {exercises[exIndex].sets.map(renderSets)}
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              <TableCell>Reps</TableCell>
+              <TableCell>Weight (Kg)</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{exercises[exIndex].sets.map(renderSets)}</TableBody>
+        </Table>
+      </TableContainer>
       <Button variant="contained" fullWidth onClick={addSet}>
         Add Set
       </Button>
