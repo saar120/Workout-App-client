@@ -6,8 +6,8 @@ const NumInput = styled.input`
   height: 1.5rem;
   padding: 0.25rem;
   font-size: 1.03rem;
-  border: 2px solid transparent;
-  border-radius: 10px;
+  border: none;
+  border-bottom: 2px solid transparent;
   text-align: center;
   &&::-webkit-inner-spin-button,
   &&::-webkit-outer-spin-button {
@@ -15,7 +15,8 @@ const NumInput = styled.input`
   }
   &&:focus {
     outline: none;
-    border: 2px solid #495a5a;
+    border: none;
+    border-bottom: 2px solid #495a5a;
     caret-color: transparent;
   }
 `;

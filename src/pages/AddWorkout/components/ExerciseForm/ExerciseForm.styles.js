@@ -5,6 +5,7 @@ const ExerciseFormStyled = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
+  background-color: #e4eff1;
   -webkit-box-shadow: 1px 2px 15px -3px #000000;
   box-shadow: 1px 2px 15px -3px #000000;
   padding: 0.3rem;
