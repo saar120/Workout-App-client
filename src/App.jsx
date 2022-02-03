@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import GlobalStyle from "./Styles/global.styles";
 import { ROUTES } from "./constants/routes.constants";
 import AddWorkoutPage from "./pages/AddWorkout/AddWorkout.page";
+import AuthPage from "./pages/AuthPage/AuthPage";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Router>
           <Routes>
             <Route path={`${ROUTES.HOME}`} element={<AddWorkoutPage />} />
+            <Route path={`${ROUTES.AUTH}`} element={<AuthPage />} />
           </Routes>
         </Router>
       </ThemeProvider>
