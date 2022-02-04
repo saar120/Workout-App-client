@@ -6,4 +6,8 @@ const workoutTrackerAPI = axios.create({
 
 const fetchExercises = () => workoutTrackerAPI.get("/exercises/all");
 
-export { fetchExercises };
+const signUp = (data) => workoutTrackerAPI.post("/users/signUp", data);
+
+const signIn = (data) => workoutTrackerAPI.post("/users/signIn", data);
+
+export { fetchExercises, signUp, signIn };

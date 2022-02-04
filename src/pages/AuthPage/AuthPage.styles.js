@@ -8,7 +8,9 @@ const FormStyled = styled.form`
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 1rem;
-  margin: 1rem;
+  a {
+    cursor: pointer;
+  }
 `;
 
 const TextFieldStyled = styled(TextField)`
@@ -19,4 +21,16 @@ const Header = styled.h4`
   text-align: center;
 `;
 
-export { FormStyled, TextFieldStyled, Header };
+const AuthContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: clamp(300px, 50vw, 700px);
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #e4eff1;
+  -webkit-box-shadow: 1px 2px 15px -3px #000000;
+  box-shadow: 1px 2px 15px -3px #000000;
+  border-radius: 20px;
+`;
+export { FormStyled, TextFieldStyled, Header, AuthContainer };
