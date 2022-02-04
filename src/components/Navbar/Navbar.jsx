@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import decode from "jwt-decode";
+import { useNavigate, useLocation } from "react-router-dom";
+import userState from "../../Recoil/atoms/userAtom";
+import { ROUTES } from "../../constants/routes.constants";
 import {
   AppBar,
   Box,
@@ -15,11 +20,43 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 const pages = ["Dashboard", "Add Workout"];
-const settings = ["Account", "Logout"];
 
 const ResponsiveAppBar = () => {
+  const [user, setUser] = useRecoilState(userState);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logOut();
+      }
+    }
+    setUser(JSON.parse(localStorage.getItem("user")));
+    // eslint-disable-next-line
+  }, [location]);
+
+  const logOut = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate(ROUTES.AUTH);
+  };
+
+  const handleUserClick = () => {
+    if (user) {
+      logOut();
+    } else {
+      navigate(ROUTES.AUTH);
+    }
+    setAnchorElUser(null);
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -81,17 +118,20 @@ const ResponsiveAppBar = () => {
             Workout Tracker
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))}
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+              Dashboard
+            </Button>
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+              Add Workout
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user?.result.name} src={user?.result.imageUrl}>
+                  {user?.result.name?.charAt(0).toUpperCase()}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -109,11 +149,9 @@ const ResponsiveAppBar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleUserClick}>
+                <Typography textAlign="center">{user ? "Logout" : "Sign Up"}</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import userState from "../../Recoil/atoms/userAtom";
 
 import { differenceInYears } from "date-fns";
@@ -25,7 +25,7 @@ const initialFormState = {
 };
 
 function AuthPage() {
-  const [User, setUser] = useRecoilState(userState);
+  const setUser = useSetRecoilState(userState);
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialFormState);
@@ -34,7 +34,6 @@ function AuthPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(differenceInYears(new Date(), date));
     if (!isSignUp && (!date || differenceInYears(new Date(), date) < 12)) {
       return console.log("Need to be above 12");
     }
@@ -76,7 +75,7 @@ function AuthPage() {
 
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
   return (
