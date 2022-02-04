@@ -8,6 +8,7 @@ import { TextField, Button } from "@mui/material";
 import AddExerciseModal from "./components/AddExerciseModal/AddExerciseModal";
 import Container from "../../components/StyledComponents/Container";
 import userState from "../../Recoil/atoms/userAtom";
+import { addWorkout } from "../../api/api";
 
 export default function WorkoutForm() {
   const user = useRecoilValue(userState);
@@ -23,13 +24,19 @@ export default function WorkoutForm() {
     setExercises([...exercises, newExercise]);
   };
 
-  const finishWorkout = () => {
+  const finishWorkout = async () => {
     const workout = {
-      creator: user.result._id || user.result.googleId,
+      creatorID: user.result._id || user.result.googleId,
       title: workoutName || "Workout",
       exercises,
     };
     console.log(workout);
+    try {
+      const { data } = await addWorkout(workout);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
