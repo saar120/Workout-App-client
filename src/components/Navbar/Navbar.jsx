@@ -15,7 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 const pages = ["Dashboard", "Add Workout"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Account", "Logout"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
