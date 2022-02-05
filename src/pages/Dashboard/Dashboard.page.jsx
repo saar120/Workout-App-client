@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 function DashboardPage() {
   const user = useRecoilValue(userState);
   const [workouts, SetWorkouts] = useRecoilState(workoutsState);
-  const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(0);
+  const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(null);
 
   useEffect(() => {
     if (!user) return;
@@ -42,7 +42,7 @@ function DashboardPage() {
 
   return (
     <Container>
-      {workouts.length === 0 ? (
+      {workouts.length === 0 || currentWorkoutIndex === null ? (
         <h1>Loading</h1>
       ) : (
         <>
