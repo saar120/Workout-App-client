@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import exerciseState from "../../Recoil/atoms/exerciseAtom";
 import workoutsState from "../../Recoil/userWorkoutsAtom";
-import userState from "../../Recoil/atoms/userAtom";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 import { v4 as uuid } from "uuid";
@@ -15,7 +14,6 @@ import Container from "../../components/StyledComponents/Container";
 import DatePicker from "../../components/DatePicker/DatePicker";
 
 export default function WorkoutForm() {
-  const user = useRecoilValue(userState);
   const setWorkouts = useSetRecoilState(workoutsState);
   const [exercises, setExercises] = useRecoilState(exerciseState);
   const [workoutName, setWorkoutName] = useState("");
@@ -39,7 +37,6 @@ export default function WorkoutForm() {
 
   const finishWorkout = async () => {
     const workout = {
-      creatorID: user.result._id || user.result.googleId,
       title: workoutName || "Workout",
       date: workoutDate || new Date(),
       exercises,

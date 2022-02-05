@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const workoutTrackerAPI = axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 workoutTrackerAPI.interceptors.request.use((req) => {
-  if (localStorage.getItem("profile")) {
-    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`;
+  if (localStorage.getItem("user")) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("user")).token}`;
   }
   return req;
 });
