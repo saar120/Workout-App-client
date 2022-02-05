@@ -11,6 +11,7 @@ export default function DatePicker({ label, value, onChange }) {
         value={value}
         onChange={onChange}
         required
+        inputFormat="dd/mm/yyyy"
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>

@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import styled from "styled-components";
+import { COLORS } from "../../constants/colors.constants";
 
 const FormStyled = styled.form`
   width: 90%;
@@ -28,7 +29,7 @@ const AuthContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background-color: #e4eff1;
+  background-color: ${COLORS.light};
   -webkit-box-shadow: 1px 2px 15px -3px #000000;
   box-shadow: 1px 2px 15px -3px #000000;
   border-radius: 20px;

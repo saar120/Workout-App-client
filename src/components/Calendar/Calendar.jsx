@@ -4,18 +4,16 @@ import { Calendar } from "react-calendar";
 import { CalendarContainer } from "./Calendar.styled";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export default function CalendarComponent() {
-  const datesToAddClassTo = [
-    new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
-    new Date(2021, 11, 27),
-    new Date(2022, 0, 29),
-    new Date(2022, 0, 30),
-    new Date(2022, 1, 12),
-  ];
-
+export default function CalendarComponent({ datesToShow }) {
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
-      if (datesToAddClassTo.find((dDate) => isEqual(dDate, date))) {
+      if (
+        datesToShow.find((dDate) => {
+          const workoutDate = new Date(dDate);
+          workoutDate.setHours(0, 0, 0, 0);
+          return isEqual(workoutDate, date);
+        })
+      ) {
         return "picked";
       }
     }
