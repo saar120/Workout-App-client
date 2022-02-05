@@ -6,9 +6,10 @@ export const CalendarContainer = styled.div`
   max-width: 600px;
   margin: auto;
   margin-top: 20px;
-  background-color: #e4e4e4;
+  background-color: ${COLORS.light};
   padding: 10px;
   border-radius: 15px;
+  box-shadow: ${COLORS.boxShadow};
   /* ~~~ navigation styles ~~~ */
   .react-calendar__navigation {
     display: flex;

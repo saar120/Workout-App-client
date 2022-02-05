@@ -1,31 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import workoutsState from "../../Recoil/userWorkoutsAtom";
 import userState from "../../Recoil/atoms/userAtom";
 import { fetchUserWorkouts } from "../../api/api";
 import CalendarComponent from "../../components/Calendar/Calendar";
 import Container from "../../components/StyledComponents/Container";
-import { isEqual } from "date-fns";
+import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
+import { Button } from "@mui/material";
 
 function DashboardPage() {
   const user = useRecoilValue(userState);
   const [workouts, SetWorkouts] = useRecoilState(workoutsState);
-
-  const onClickDay = (value) => {
-    const workoutClicked = workouts.find((workout) => {
-      const workoutDate = new Date(workout.date).setHours(0, 0, 0, 0);
-      return isEqual(workoutDate, value);
-    });
-    console.log(workoutClicked);
-  };
+  const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(0);
 
   useEffect(() => {
     if (!user) return;
     const getWorkouts = async () => {
-      const {
-        data: { workouts: userWorkouts },
-      } = await fetchUserWorkouts();
-      SetWorkouts(userWorkouts);
+      try {
+        const {
+          data: { workouts: userWorkouts },
+        } = await fetchUserWorkouts();
+        SetWorkouts(userWorkouts);
+        setCurrentWorkoutIndex(userWorkouts.length - 1);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getWorkouts();
   }, [SetWorkouts, user]);
@@ -37,11 +36,31 @@ function DashboardPage() {
     });
   };
 
+  const isLatest = () => {
+    return workouts.length - 1 === currentWorkoutIndex;
+  };
+
   return (
     <Container>
-      <CalendarComponent datesToShow={getWorkoutDates()} onClickDay={onClickDay} />
+      {workouts.length === 0 ? (
+        <h1>Loading</h1>
+      ) : (
+        <>
+          <Button onClick={() => setCurrentWorkoutIndex(workouts.length - 1)}>Show Latest</Button>
+          <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
+          <CalendarComponent datesToShow={getWorkoutDates()} />
+        </>
+      )}
     </Container>
   );
 }
 
 export default DashboardPage;
+
+// const onClickDay = (value) => {
+//   const clickedIndex = workouts.findIndex((workout) => {
+//     const workoutDate = new Date(workout.date).setHours(0, 0, 0, 0);
+//     return isEqual(workoutDate, value);
+//   });
+//   clickedIndex >= 0 && setCurrentWorkoutIndex(clickedIndex);
+// };

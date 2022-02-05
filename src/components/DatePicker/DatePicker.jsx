@@ -10,8 +10,8 @@ export default function DatePicker({ label, value, onChange }) {
         label={label}
         value={value}
         onChange={onChange}
+        inputFormat="dd/MM/yyyy"
         required
-        inputFormat="dd/mm/yyyy"
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
