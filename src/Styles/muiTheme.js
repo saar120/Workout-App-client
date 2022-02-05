@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import { COLORS } from "../constants/colors.constants";
 const THEME = createTheme({
   typography: {
     fontFamily: `"Oxygen", sans-serif`,
@@ -9,10 +10,10 @@ const THEME = createTheme({
   },
   palette: {
     primary: {
-      main: "rgb(56,145,166)",
+      main: COLORS.primary,
     },
     secondary: {
-      main: "rgb(219,84,97)",
+      main: COLORS.secondary,
     },
   },
 });

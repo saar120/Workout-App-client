@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { COLORS } from "../../../../constants/colors.constants";
 
 const ExerciseFormStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
-  background-color: #e4eff1;
+  background-color: ${COLORS.light};
   -webkit-box-shadow: 1px 2px 15px -3px #000000;
   box-shadow: 1px 2px 15px -3px #000000;
   padding: 0.3rem;
