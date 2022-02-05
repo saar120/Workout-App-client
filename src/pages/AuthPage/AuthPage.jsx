@@ -26,7 +26,7 @@ const initialFormState = {
 
 function AuthPage() {
   const setUser = useSetRecoilState(userState);
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialFormState);
   const [date, setDate] = useState(null);

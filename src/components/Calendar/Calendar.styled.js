@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../../constants/colors.constants";
 
 export const CalendarContainer = styled.div`
   /* ~~~ container styles ~~~ */
@@ -12,9 +13,9 @@ export const CalendarContainer = styled.div`
   .react-calendar__navigation {
     display: flex;
     .react-calendar__navigation__label {
-      font-weight: bold;
     }
     .react-calendar__navigation__arrow {
+      cursor: pointer;
       flex-grow: 0.333;
     }
   }
@@ -75,7 +76,8 @@ export const CalendarContainer = styled.div`
 
   .picked {
     color: white;
-    background-color: #045757;
+    cursor: pointer;
+    background-color: ${COLORS.secondary};
   }
 
   .react-calendar__month-view__days .react-calendar__tile--range {

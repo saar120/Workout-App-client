@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import decode from "jwt-decode";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import userState from "../../Recoil/atoms/userAtom";
+import workoutsState from "../../Recoil/userWorkoutsAtom";
+import exerciseState from "../../Recoil/atoms/exerciseAtom";
+
 import { ROUTES } from "../../constants/routes.constants";
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const ResponsiveAppBar = () => {
   const [user, setUser] = useRecoilState(userState);
+  const resetExercises = useResetRecoilState(exerciseState);
+  const resetWorkouts = useResetRecoilState(workoutsState);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -32,6 +37,8 @@ const ResponsiveAppBar = () => {
   const logOut = () => {
     localStorage.removeItem("user");
     setUser(null);
+    resetExercises();
+    resetWorkouts();
     navigate(ROUTES.AUTH);
   };
 

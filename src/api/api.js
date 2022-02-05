@@ -19,4 +19,6 @@ const signIn = (data) => workoutTrackerAPI.post("/users/signIn", data);
 
 const addWorkout = (data) => workoutTrackerAPI.post("/workouts/add", data);
 
-export { fetchExercises, signUp, signIn, addWorkout };
+const fetchUserWorkouts = () => workoutTrackerAPI.get("/workouts/getAll");
+
+export { fetchExercises, signUp, signIn, addWorkout, fetchUserWorkouts };

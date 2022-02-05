@@ -4,7 +4,7 @@ import { Calendar } from "react-calendar";
 import { CalendarContainer } from "./Calendar.styled";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export default function CalendarComponent({ datesToShow }) {
+export default function CalendarComponent({ datesToShow, onClickDay }) {
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
       if (
@@ -26,6 +26,7 @@ export default function CalendarComponent({ datesToShow }) {
         maxDetail="month"
         defaultView="month"
         calendarType="Hebrew"
+        onClickDay={onClickDay}
         locale="en-US"
         prev2Label={
           <>
