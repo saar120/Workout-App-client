@@ -9,9 +9,7 @@ export const WorkoutCardStyled = styled.div`
   background-color: ${COLORS.light};
   box-shadow: ${COLORS.boxShadow};
   border-radius: 10px;
-  min-width: 300px;
-  max-width: 700px;
-  overflow: hidden;
+  width: clamp(300px, 50vw, 800px);
 `;
 
 export const WorkoutTitle = styled.div`
