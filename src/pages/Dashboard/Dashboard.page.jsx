@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 function DashboardPage() {
   const user = useRecoilValue(userState);
   const [workouts, SetWorkouts] = useRecoilState(workoutsState);
-  const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(null);
+  const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(0);
 
   useEffect(() => {
     if (!user) return;
@@ -21,13 +21,13 @@ function DashboardPage() {
           data: { workouts: userWorkouts },
         } = await fetchUserWorkouts();
         SetWorkouts(userWorkouts);
-        setCurrentWorkoutIndex(userWorkouts.length - 1);
       } catch (error) {
         console.log(error);
       }
     };
     getWorkouts();
-  }, [SetWorkouts, user]);
+    //eslint-disable-next-line
+  }, [SetWorkouts]);
 
   const getWorkoutDates = () => {
     if (workouts.length === 0) return [];
@@ -42,11 +42,11 @@ function DashboardPage() {
 
   return (
     <Container>
-      {workouts.length === 0 || currentWorkoutIndex === null ? (
+      {workouts.length === 0 ? (
         <h1>Loading</h1>
       ) : (
         <>
-          <Button onClick={() => setCurrentWorkoutIndex(workouts.length - 1)}>Show Latest</Button>
+          <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button>
           <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
           <CalendarComponent datesToShow={getWorkoutDates()} />
         </>

@@ -30,8 +30,7 @@ const ResponsiveAppBar = () => {
         logOut();
       }
     }
-    setUser(JSON.parse(localStorage.getItem("user")));
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, [location]);
 
   const logOut = () => {
