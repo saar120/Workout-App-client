@@ -12,7 +12,9 @@ const Container = styled.div`
   background-color: #191d24;
   border-radius: 10px;
   padding: 1rem;
-  min-width: 300px;
+  width: clamp(250px, 50vw, 300px);
+  min-height: 150px;
+  z-index: 100;
 `;
 
 const SubContainer = styled.div`

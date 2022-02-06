@@ -37,7 +37,7 @@ function DashboardPage() {
   };
 
   const isLatest = () => {
-    return workouts.length - 1 === currentWorkoutIndex;
+    return currentWorkoutIndex === 0;
   };
 
   return (
@@ -49,6 +49,7 @@ function DashboardPage() {
           <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button>
           <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
           <CalendarComponent datesToShow={getWorkoutDates()} />
+          <div>AllWorkouts</div>
         </>
       )}
     </Container>
