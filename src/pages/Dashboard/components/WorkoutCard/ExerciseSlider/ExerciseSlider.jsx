@@ -1,23 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Navigation, Pagination } from "swiper";
 import SmallExercise from "../SmallExercise/SmallExercise";
-import { IconButton, useMediaQuery, Container } from "@mui/material";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { useMediaQuery, Container } from "@mui/material";
+import SliderButton from "./Components/SliderButton";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const SliderButton = ({ next }) => {
-  const swiper = useSwiper();
-  return (
-    <IconButton onClick={() => (next ? swiper.slideNext() : swiper.slidePrev())}>
-      {next ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
-    </IconButton>
-  );
-};
-
 function ExerciseSlider({ exercises }) {
+  const swiperRef = useRef(null);
   const isDesktop = useMediaQuery("(min-width:900px)");
   const isLargeScreen = useMediaQuery("(min-width:1280px)");
 
@@ -27,8 +18,11 @@ function ExerciseSlider({ exercises }) {
     return 1;
   };
 
-  return (
+  return exercises.length === 1 ? (
+    <SmallExercise exercise={exercises[0]} />
+  ) : (
     <Swiper
+      ref={swiperRef}
       modules={[Navigation, Pagination]}
       spaceBetween={30}
       slidesPerView={slidesPerView()}
@@ -43,8 +37,8 @@ function ExerciseSlider({ exercises }) {
       <Container sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
         {isDesktop ? (
           <>
-            <SliderButton />
-            <SliderButton next />
+            <SliderButton swiperRef={swiperRef} />
+            <SliderButton next swiperRef={swiperRef} />
           </>
         ) : (
           <div style={{ height: "2rem" }}></div>

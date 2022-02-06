@@ -4,10 +4,10 @@ import workoutsState from "../../Recoil/userWorkoutsAtom";
 import userState from "../../Recoil/atoms/userAtom";
 import { fetchUserWorkouts } from "../../api/api";
 import CalendarComponent from "../../components/Calendar/Calendar";
-import Container from "../../components/StyledComponents/Container";
 import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
 import { Button } from "@mui/material";
 import WorkoutSlider from "./components/WorkoutCard/WorkoutsSlider/WorkoutSlider";
+import Container from "../../components/StyledComponents/Container";
 
 function DashboardPage() {
   const user = useRecoilValue(userState);
@@ -46,12 +46,22 @@ function DashboardPage() {
       {workouts.length === 0 ? (
         <h1>Loading</h1>
       ) : (
-        <>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            flexWrap: "wrap",
+            alignItems: "baseline",
+            justifyContent: "center",
+            gap: "2rem",
+          }}>
           <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button>
-          <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
-          <WorkoutSlider workouts={workouts} setCurrentWorkout={(index) => setCurrentWorkoutIndex(index)} />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
+            <WorkoutSlider workouts={workouts} setCurrentWorkout={(index) => setCurrentWorkoutIndex(index)} />
+          </div>
           <CalendarComponent datesToShow={getWorkoutDates()} />
-        </>
+        </div>
       )}
     </Container>
   );
