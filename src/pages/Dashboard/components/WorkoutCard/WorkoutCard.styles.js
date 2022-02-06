@@ -10,6 +10,7 @@ export const WorkoutCardStyled = styled.div`
   box-shadow: ${COLORS.boxShadow};
   border-radius: 10px;
   width: clamp(300px, 50vw, 800px);
+  margin: auto;
 `;
 
 export const WorkoutTitle = styled.div`
