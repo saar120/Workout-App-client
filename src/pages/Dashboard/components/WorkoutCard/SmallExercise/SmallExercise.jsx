@@ -13,7 +13,7 @@ const Container = styled.div`
   border-radius: 10px;
   padding: 1rem;
   width: clamp(250px, 50vw, 300px);
-  min-height: 150px;
+  min-height: 170px;
   z-index: 100;
 `;
 
