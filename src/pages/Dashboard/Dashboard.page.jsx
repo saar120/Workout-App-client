@@ -7,6 +7,7 @@ import CalendarComponent from "../../components/Calendar/Calendar";
 import Container from "../../components/StyledComponents/Container";
 import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
 import { Button } from "@mui/material";
+import WorkoutSlider from "./components/WorkoutCard/WorkoutsSlider/WorkoutSlider";
 
 function DashboardPage() {
   const user = useRecoilValue(userState);
@@ -48,8 +49,8 @@ function DashboardPage() {
         <>
           <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button>
           <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
+          <WorkoutSlider workouts={workouts} setCurrentWorkout={(index) => setCurrentWorkoutIndex(index)} />
           <CalendarComponent datesToShow={getWorkoutDates()} />
-          <div>AllWorkouts</div>
         </>
       )}
     </Container>

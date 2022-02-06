@@ -22,8 +22,8 @@ function ExerciseSlider({ exercises }) {
   const isLargeScreen = useMediaQuery("(min-width:1280px)");
 
   const slidesPerView = () => {
-    if (isLargeScreen) return 3;
-    if (isDesktop) return 2;
+    if (isLargeScreen && exercises.length >= 3) return 3;
+    if (isDesktop && exercises.length >= 2) return 2;
     return 1;
   };
 
@@ -36,7 +36,7 @@ function ExerciseSlider({ exercises }) {
         dynamicBullets: true,
       }}>
       {exercises.map((exercise) => (
-        <SwiperSlide key={exercise._id}>
+        <SwiperSlide key={exercise._id} onClick={() => console.log(exercise)}>
           <SmallExercise exercise={exercise} />
         </SwiperSlide>
       ))}
