@@ -33,7 +33,7 @@ function WorkoutSlider({ workouts, setCurrentWorkout }) {
     if (isLargeScreen && workouts.length >= 5) return 5;
     if (isDesktop && workouts.length >= 3) return 3;
     if (workouts.length >= 3) return 3;
-    return 1;
+    return 2;
   };
 
   const workoutClickHandler = (index) => {
@@ -60,7 +60,7 @@ function WorkoutSlider({ workouts, setCurrentWorkout }) {
         {workouts.map((workout, index) => (
           <SwiperSlide key={workout._id} onClick={() => workoutClickHandler(index)} style={{ height: "100px" }}>
             <SmallWorkout>
-              {format(new Date(workout.date), "dd-MM-yy")}
+              {format(new Date(workout.date), "dd/MM/yy")}
               <br />
               {workout.title}
             </SmallWorkout>

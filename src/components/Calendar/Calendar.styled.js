@@ -4,8 +4,6 @@ import { COLORS } from "../../constants/colors.constants";
 export const CalendarContainer = styled.div`
   /* ~~~ container styles ~~~ */
   max-width: 600px;
-  margin: auto;
-  margin-top: 20px;
   background-color: ${COLORS.light};
   padding: 10px;
   border-radius: 15px;

@@ -12,8 +12,8 @@ const Container = styled.div`
   background-color: #191d24;
   border-radius: 10px;
   padding: 1rem;
-  width: clamp(250px, 50vw, 300px);
-  min-height: 170px;
+  width: clamp(250px, 50vw, 400px);
+  min-height: 175px;
   z-index: 100;
 `;
 
