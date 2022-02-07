@@ -8,6 +8,7 @@ import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
 import { Button } from "@mui/material";
 import WorkoutSlider from "./components/WorkoutCard/WorkoutsSlider/WorkoutSlider";
 import Container from "../../components/StyledComponents/Container";
+import { DashboardPageStyled, WorkoutHolder } from "./Dashboard.Styles";
 
 function DashboardPage() {
   const user = useRecoilValue(userState);
@@ -46,33 +47,17 @@ function DashboardPage() {
       {workouts.length === 0 ? (
         <h1>Loading</h1>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            flexWrap: "wrap",
-            alignItems: "baseline",
-            justifyContent: "center",
-            gap: "2rem",
-          }}>
+        <DashboardPageStyled>
           <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <WorkoutHolder>
             <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} />
             <WorkoutSlider workouts={workouts} setCurrentWorkout={(index) => setCurrentWorkoutIndex(index)} />
-          </div>
+          </WorkoutHolder>
           <CalendarComponent datesToShow={getWorkoutDates()} />
-        </div>
+        </DashboardPageStyled>
       )}
     </Container>
   );
 }
 
 export default DashboardPage;
-
-// const onClickDay = (value) => {
-//   const clickedIndex = workouts.findIndex((workout) => {
-//     const workoutDate = new Date(workout.date).setHours(0, 0, 0, 0);
-//     return isEqual(workoutDate, value);
-//   });
-//   clickedIndex >= 0 && setCurrentWorkoutIndex(clickedIndex);
-// };
