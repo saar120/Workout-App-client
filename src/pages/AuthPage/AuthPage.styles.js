@@ -25,13 +25,13 @@ const Header = styled.h4`
 const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 50vw, 700px);
+  width: clamp(300px, 50vw, 500px);
   justify-content: center;
   align-items: center;
   padding: 1rem;
   background-color: ${COLORS.light};
   -webkit-box-shadow: 1px 2px 15px -3px #000000;
-  box-shadow: 1px 2px 15px -3px #000000;
+  box-shadow: ${COLORS.boxShadow};
   border-radius: 20px;
 `;
 export { FormStyled, TextFieldStyled, Header, AuthContainer };

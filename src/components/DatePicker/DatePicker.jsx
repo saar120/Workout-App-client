@@ -4,7 +4,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { DatePicker as MUIdatePicker } from "@mui/lab/";
 import { COLORS } from "../../constants/colors.constants";
 
-export default function DatePicker({ label, value, onChange }) {
+export default function DatePicker({ label, value, onChange, variant }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MUIdatePicker
@@ -13,7 +13,7 @@ export default function DatePicker({ label, value, onChange }) {
         onChange={onChange}
         inputFormat="dd/MM/yyyy"
         required
-        renderInput={(params) => <TextField sx={{ backgroundColor: COLORS.light }} variant="filled" {...params} />}
+        renderInput={(params) => <TextField sx={{ backgroundColor: COLORS.light }} variant={variant} {...params} />}
       />
     </LocalizationProvider>
   );

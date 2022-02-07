@@ -66,6 +66,7 @@ export default function WorkoutForm() {
         <DatePicker
           label="Workout Date"
           value={workoutDate}
+          variant="filled"
           onChange={(newDate) => {
             setWorkoutDate(newDate);
           }}
