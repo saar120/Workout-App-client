@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DashboardPageStyled = styled.div`
   display: flex;
-  width: 100%;
+  max-width: 1300px;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: center;
