@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../../../../constants/colors.constants";
 
 const ModalContainer = styled.div`
   top: 50%;
@@ -14,8 +15,8 @@ const ModalContainer = styled.div`
   align-content: center;
   flex-direction: column;
   padding: 1.3rem;
-  background-color: white;
-  border: 2px solid #495a5a;
+  background-color: ${COLORS.light};
+  box-shadow: ${COLORS.boxShadow};
 `;
 
 const OverlayContainer = styled.div`

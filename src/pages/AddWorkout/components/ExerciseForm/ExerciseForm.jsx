@@ -36,7 +36,7 @@ export default function ExerciseForm({ exercise, exIndex }) {
 
   const addSet = () => {
     const lastSet = exercises[exIndex].sets[exercises[exIndex].sets.length - 1];
-    if (!lastSet.weight || !lastSet.reps) return;
+    if (lastSet.weight === "" || lastSet.reps === "") return;
     const updatedExercises = produce(exercises, (draft) => {
       draft[exIndex].sets.push({ id: uuid(), reps: "", weight: "" });
     });

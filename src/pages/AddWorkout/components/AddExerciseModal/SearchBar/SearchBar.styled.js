@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../../../../../constants/colors.constants";
 
 const ResultsHolder = styled.div`
   width: 100%;
@@ -8,6 +9,7 @@ const ResultsHolder = styled.div`
   align-items: center;
   overflow: hidden;
   overflow-y: auto;
+  background-color: ${COLORS.light};
   &&::-webkit-scrollbar {
     display: none;
   }
@@ -21,11 +23,12 @@ const Result = styled.div`
   align-items: center;
   padding: 5px;
   border-radius: 15px;
+  background-color: ${COLORS.light};
   color: #121616;
-  border: 2px solid #495a5a;
+  border: 2px solid ${COLORS.primary};
   cursor: pointer;
   &&:hover {
-    border-color: #3891a6;
+    border-color: ${COLORS.secondary};
   }
 `;
 

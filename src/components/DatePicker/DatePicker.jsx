@@ -2,6 +2,7 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { DatePicker as MUIdatePicker } from "@mui/lab/";
+import { COLORS } from "../../constants/colors.constants";
 
 export default function DatePicker({ label, value, onChange }) {
   return (
@@ -12,7 +13,7 @@ export default function DatePicker({ label, value, onChange }) {
         onChange={onChange}
         inputFormat="dd/MM/yyyy"
         required
-        renderInput={(params) => <TextField {...params} />}
+        renderInput={(params) => <TextField sx={{ backgroundColor: COLORS.light }} variant="filled" {...params} />}
       />
     </LocalizationProvider>
   );

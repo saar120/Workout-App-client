@@ -11,3 +11,12 @@ export const WorkoutFormStyled = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+`;

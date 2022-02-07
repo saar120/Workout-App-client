@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 import { v4 as uuid } from "uuid";
 import { addWorkout } from "../../api/api";
-import { WorkoutFormStyled } from "./WorkoutPage.styled";
+import { InputGroup, WorkoutFormStyled } from "./WorkoutPage.styled";
 import ExerciseForm from "./components/ExerciseForm/ExerciseForm";
 import { TextField, Button } from "@mui/material";
 import AddExerciseModal from "./components/AddExerciseModal/AddExerciseModal";
 import Container from "../../components/StyledComponents/Container";
 import DatePicker from "../../components/DatePicker/DatePicker";
+import { COLORS } from "../../constants/colors.constants";
 
 export default function WorkoutForm() {
   const setWorkouts = useSetRecoilState(workoutsState);
@@ -53,21 +54,28 @@ export default function WorkoutForm() {
 
   return (
     <Container>
-      <TextField
-        name="title"
-        variant="outlined"
-        label="Workout Name"
-        value={workoutName}
-        onChange={({ target: { value } }) => setWorkoutName(value)}
-      />
-      <DatePicker
-        label="Workout Date"
-        value={workoutDate}
-        onChange={(newDate) => {
-          setWorkoutDate(newDate);
-        }}
-      />
-      {exercises.length > 0 && <Button onClick={finishWorkout}>Finish Workout</Button>}
+      <InputGroup>
+        <TextField
+          name="title"
+          label="Workout Name"
+          sx={{ backgroundColor: COLORS.light }}
+          value={workoutName}
+          variant="filled"
+          onChange={({ target: { value } }) => setWorkoutName(value)}
+        />
+        <DatePicker
+          label="Workout Date"
+          value={workoutDate}
+          onChange={(newDate) => {
+            setWorkoutDate(newDate);
+          }}
+        />
+      </InputGroup>
+      {exercises.length > 0 && (
+        <Button variant="contained" onClick={finishWorkout}>
+          Finish Workout
+        </Button>
+      )}
       <WorkoutFormStyled>
         {exercises?.length > 0 && renderExercises()}
         <Button onClick={() => setShowAddExercise(true)}>Add Exercise</Button>

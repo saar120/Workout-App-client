@@ -53,6 +53,7 @@ function WorkoutChart() {
         height: "clamp(500px,60vh,600px)",
         width: "clamp(320px,70vw,1000px)",
         boxShadow: COLORS.boxShadow,
+        backgroundColor: COLORS.light,
         borderRadius: "10px",
         gap: "5px",
       }}>
