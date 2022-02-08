@@ -18,6 +18,13 @@ export const WorkoutTitle = styled.div`
   font-size: 1.7rem;
 `;
 
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 export const Group = styled.div`
   display: flex;
   flex-direction: column;

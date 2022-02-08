@@ -24,7 +24,9 @@ export default function WorkoutForm() {
   const navigate = useNavigate();
 
   const renderExercises = () =>
-    exercises.map((exercise, index) => <ExerciseForm key={exercise.id} exercise={exercise} exIndex={index} />);
+    exercises.map((exercise, index) => (
+      <ExerciseForm key={exercise.id || exercise._id} exercise={exercise} exIndex={index} />
+    ));
 
   const addExercise = (exercise) => {
     const newExercise = { id: uuid(), name: exercise, sets: [{ id: uuid(), reps: "", weight: "" }] };
