@@ -5,6 +5,7 @@ import Description from "../../../../components/Description/Description";
 import ExerciseSlider from "./ExerciseSlider/ExerciseSlider";
 import { Button, ButtonGroup } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { COLORS } from "../../../../constants/colors.constants";
 
 function WorkoutCard({ workout, isLatest, redoHandler }) {
   return (
@@ -19,8 +20,8 @@ function WorkoutCard({ workout, isLatest, redoHandler }) {
             </Button>
           </ButtonGroup>
         </Header>
-        {isLatest && <SmallText>Latest workout</SmallText>}
         <SmallText>{formatDistanceToNow(new Date(workout.date)) + " ago"}</SmallText>
+        <SmallText color={COLORS.secondary}>{isLatest ? "Latest workout" : ""}</SmallText>
       </Group>
       <Description title="Volume" body={workout.volume + " KG"} />
 

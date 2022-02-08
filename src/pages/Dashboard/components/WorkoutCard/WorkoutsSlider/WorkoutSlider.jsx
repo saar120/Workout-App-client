@@ -62,6 +62,8 @@ function WorkoutSlider({ workouts, setCurrentWorkout }) {
             <SmallWorkout>
               {format(new Date(workout.date), "dd/MM/yy")}
               <br />
+              {format(new Date(workout.date), "E")}
+              <br />
               {workout.title}
             </SmallWorkout>
           </SwiperSlide>

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLORS } from "../../../../constants/colors.constants";
-
 export const WorkoutCardStyled = styled.div`
   padding: 1rem;
   display: flex;
@@ -34,6 +33,8 @@ export const Group = styled.div`
 export const SmallText = styled.div`
   font-size: 0.8rem;
   font-weight: 400;
+  min-height: 1rem;
+  color: ${(props) => props.color};
 `;
 
 export const ExercisesHolder = styled.div`

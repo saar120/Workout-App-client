@@ -3,9 +3,9 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 import workoutsState from "../../Recoil/userWorkoutsAtom";
-import _ from "lodash";
 import userState from "../../Recoil/atoms/userAtom";
 import { fetchUserWorkouts } from "../../api/api";
+import { duplicateExercises } from "./Dashboard.lib";
 import CalendarComponent from "../../components/Calendar/Calendar";
 import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
 import WorkoutSlider from "./components/WorkoutCard/WorkoutsSlider/WorkoutSlider";
@@ -50,14 +50,7 @@ function DashboardPage() {
   };
 
   const redoHandler = () => {
-    const exercisesCopy = _.cloneDeep(workouts[currentWorkoutIndex].exercises);
-    exercisesCopy.forEach((exercise) => {
-      delete exercise.rm1;
-      delete exercise.totalReps;
-      delete exercise.volume;
-      delete exercise.validSets;
-      delete exercise.totalWeight;
-    });
+    const exercisesCopy = duplicateExercises(workouts[currentWorkoutIndex].exercises);
     setExercises(exercisesCopy);
     navigate(ROUTES.WORKOUT);
   };

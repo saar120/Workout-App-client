@@ -24,10 +24,11 @@ export default function Chart({ exerciseData, dataset }) {
       label: dataset.label,
       data: exerciseData.map((ex) => ex[dataset.value]),
       borderColor: COLORS.secondary,
-      pointRadius: 4,
-      borderWidth: 4,
+      pointRadius: isDesktop ? 3 : 2,
+      borderWidth: isDesktop ? 4 : 3,
       pointBackgroundColor: COLORS.secondary,
-      pointHoverRadius: 6,
+      pointHoverRadius: 3,
+      tension: 0.2,
     },
   ];
 
@@ -54,14 +55,14 @@ export default function Chart({ exerciseData, dataset }) {
               display: isDesktop ? true : null,
               color: COLORS.primary,
               formatter(value) {
-                return value + " " + dataset.des;
+                return value + "\n" + dataset.des;
               },
               font: {
-                size: isDesktop ? 14 : 11,
+                size: 12,
               },
               anchor: "start",
               align: "top",
-              offset: 10,
+              offset: 5,
             },
             legend: {
               display: false,
