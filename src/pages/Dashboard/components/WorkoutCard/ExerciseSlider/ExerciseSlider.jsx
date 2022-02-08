@@ -34,7 +34,7 @@ function ExerciseSlider({ exercises }) {
         </SwiperSlide>
       ))}
       <Container sx={{ display: "flex", justifyContent: "space-between", gap: 2, mt: "1rem" }}>
-        {isDesktop ? (
+        {isDesktop && exercises.length > 1 ? (
           <>
             <SliderButton swiperRef={swiperRef} />
             <SliderButton next swiperRef={swiperRef} />
