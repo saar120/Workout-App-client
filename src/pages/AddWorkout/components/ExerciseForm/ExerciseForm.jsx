@@ -31,7 +31,9 @@ export default function ExerciseForm({ exercise, exIndex }) {
 
   const renderSets = (set, setIndex) => {
     const onChangeHandlerCB = onChangeHandler(exIndex, setIndex);
-    return <SetForm key={set.id} set={set} setIndex={setIndex} exIndex={exIndex} onChange={onChangeHandlerCB} />;
+    return (
+      <SetForm key={set.id || set._id} set={set} setIndex={setIndex} exIndex={exIndex} onChange={onChangeHandlerCB} />
+    );
   };
 
   const addSet = () => {
