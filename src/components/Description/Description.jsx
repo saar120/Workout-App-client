@@ -7,6 +7,7 @@ const Title = styled.div`
   color: ${COLORS.secondary};
   font-size: 1.2rem;
   margin-right: 1rem;
+  text-align: center;
 `;
 
 const Text = styled.div`

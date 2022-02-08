@@ -42,7 +42,7 @@ function AuthPage() {
       const { data } = await action({ ...formData, birthDate: date });
       setUser(data);
       localStorage.setItem("user", JSON.stringify(data));
-      navigate(ROUTES.HOME);
+      navigate(ROUTES.DASH);
     } catch (err) {
       console.log(err.response.data.message);
     }
@@ -53,7 +53,7 @@ function AuthPage() {
     const token = res?.tokenId;
     setUser({ result, token });
     localStorage.setItem("user", JSON.stringify({ result, token }));
-    navigate("/");
+    navigate(ROUTES.DASH);
     try {
     } catch (error) {
       console.log(error);

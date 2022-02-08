@@ -13,18 +13,17 @@ function ExerciseSlider({ exercises }) {
   const isLargeScreen = useMediaQuery("(min-width:1280px)");
 
   const slidesPerView = () => {
+    if (exercises.length === 1) return 1;
     if (isLargeScreen && exercises.length >= 3) return 3;
     if (isDesktop && exercises.length >= 2) return 2;
     return 1;
   };
 
-  return exercises.length === 1 ? (
-    <SmallExercise exercise={exercises[0]} />
-  ) : (
+  return (
     <Swiper
       ref={swiperRef}
       modules={[Navigation, Pagination]}
-      spaceBetween={30}
+      spaceBetween={exercises.length === 1 ? 0 : 30}
       slidesPerView={slidesPerView()}
       pagination={{
         dynamicBullets: true,
@@ -35,7 +34,7 @@ function ExerciseSlider({ exercises }) {
         </SwiperSlide>
       ))}
       <Container sx={{ display: "flex", justifyContent: "space-between", gap: 2, mt: "1rem" }}>
-        {isDesktop ? (
+        {isDesktop && exercises.length > 1 ? (
           <>
             <SliderButton swiperRef={swiperRef} />
             <SliderButton next swiperRef={swiperRef} />
