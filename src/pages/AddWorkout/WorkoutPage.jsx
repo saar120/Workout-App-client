@@ -8,11 +8,12 @@ import { v4 as uuid } from "uuid";
 import { addWorkout } from "../../api/api";
 import { InputGroup, WorkoutFormStyled } from "./WorkoutPage.styled";
 import ExerciseForm from "./components/ExerciseForm/ExerciseForm";
-import { TextField, Button } from "@mui/material";
-import AddExerciseModal from "./components/AddExerciseModal/AddExerciseModal";
+import { TextField, Button, Modal } from "@mui/material";
 import Container from "../../components/StyledComponents/Container";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import { COLORS } from "../../constants/colors.constants";
+import { ModalContainer } from "./components/AddExerciseModal/AddExercise.styled";
+import SearchBar from "./components/AddExerciseModal/SearchBar/SearchBar";
 
 export default function WorkoutForm() {
   const setWorkouts = useSetRecoilState(workoutsState);
@@ -83,7 +84,11 @@ export default function WorkoutForm() {
         {exercises?.length > 0 && renderExercises()}
         <Button onClick={() => setShowAddExercise(true)}>Add Exercise</Button>
       </WorkoutFormStyled>
-      {showAddExercise && <AddExerciseModal setShowAddExercise={setShowAddExercise} addExercise={addExercise} />}
+      <Modal open={showAddExercise} onClose={() => setShowAddExercise(false)}>
+        <ModalContainer>
+          <SearchBar addExercise={addExercise} closeModal={() => setShowAddExercise(false)} />
+        </ModalContainer>
+      </Modal>
     </Container>
   );
 }

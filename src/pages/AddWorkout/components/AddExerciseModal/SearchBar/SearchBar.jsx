@@ -8,6 +8,7 @@ function SearchBar({ addExercise, closeModal }) {
   const [category, setCategory] = useState("name");
   const [searchTerm, setSearchTerm] = useState("");
   const [exercises, setExercises] = useState([]);
+  const [textInput, setTextInput] = useState("");
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("exercises"))) {
@@ -25,6 +26,17 @@ function SearchBar({ addExercise, closeModal }) {
     getExercises();
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchTerm(textInput), 200);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [textInput]);
+
+  const handleTextInput = ({ target: { value } }) => {
+    setTextInput(value);
+  };
+
   const handleSelect = ({ target: { value } }) => {
     setCategory(value);
     setSearchTerm("");
@@ -35,16 +47,20 @@ function SearchBar({ addExercise, closeModal }) {
   };
 
   const renderFilteredExercises = () => {
-    if (exercises.length === 0) return;
-    const filtered =
-      category === "name"
-        ? exercises.filter((ex) => ex.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)
-        : exercises.filter((ex) => ex.primaryMuscles.join(" ").indexOf(searchTerm.toLowerCase()) !== -1);
-    return filtered.map((ex) => (
-      <Result onClick={() => exerciseClick(ex.name)} key={ex.name}>
-        {ex.name}
-      </Result>
-    ));
+    const filtered = [];
+    for (let ex of exercises) {
+      if (category === "name") {
+        if (ex.name.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1) continue;
+      } else {
+        if (ex.primaryMuscles.join(" ").indexOf(searchTerm.toLowerCase()) === -1) continue;
+      }
+      filtered.push(
+        <Result onClick={() => exerciseClick(ex.name)} key={ex.name}>
+          {ex.name}
+        </Result>
+      );
+    }
+    return filtered;
   };
 
   const exerciseClick = (exercise) => {
@@ -62,7 +78,7 @@ function SearchBar({ addExercise, closeModal }) {
         </Select>
       </FormControl>
       {category === "name" ? (
-        <TextField name="exercise" variant="outlined" label="Search" value={searchTerm} onChange={handleSearchTerm} />
+        <TextField name="exercise" variant="outlined" label="Search" value={textInput} onChange={handleTextInput} />
       ) : (
         <FormControl>
           <InputLabel id="muscle">Muscle</InputLabel>

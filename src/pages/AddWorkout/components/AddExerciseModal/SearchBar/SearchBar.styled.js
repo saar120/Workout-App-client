@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLORS } from "../../../../../constants/colors.constants";
-import { Button } from "@mui/material";
 
 const ResultsHolder = styled.div`
   width: 100%;
@@ -16,13 +15,14 @@ const ResultsHolder = styled.div`
   }
 `;
 
-const Result = styled(Button)`
+const Result = styled.button`
   && {
     width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
+    min-height: 50px;
     border-radius: 15px;
     background-color: ${COLORS.light};
     color: #121616;
