@@ -44,7 +44,7 @@ function WorkoutSlider({ workouts, setCurrentWorkout }) {
   return (
     <Container
       sx={{
-        width: "clamp(350px,50vw,800px)",
+        width: "clamp(350px,80vw,800px)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

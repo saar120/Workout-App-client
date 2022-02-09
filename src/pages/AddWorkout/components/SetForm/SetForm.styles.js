@@ -2,7 +2,7 @@ import { TableCell } from "@mui/material";
 import styled from "styled-components";
 
 const NumInput = styled.input`
-  width: 3.5rem;
+  width: 4rem;
   height: 1.5rem;
   padding: 0.25rem;
   font-size: 1.03rem;

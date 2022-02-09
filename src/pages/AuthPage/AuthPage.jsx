@@ -49,12 +49,12 @@ function AuthPage() {
   };
 
   const googleSuccess = async (res) => {
-    const result = res?.profileObj; //taking profile obj from google res
-    const token = res?.tokenId;
-    setUser({ result, token });
-    localStorage.setItem("user", JSON.stringify({ result, token }));
-    navigate(ROUTES.DASH);
     try {
+      const result = res?.profileObj; //taking profile obj from google res
+      const token = res?.tokenId;
+      setUser({ result, token });
+      localStorage.setItem("user", JSON.stringify({ result, token }));
+      navigate(ROUTES.DASH);
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +76,18 @@ function AuthPage() {
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
     setShowPassword(false);
+  };
+
+  const demoSignIn = async () => {
+    try {
+      const loginData = { email: "guest@guest.com", password: "guest123" };
+      const { data } = await signIn(loginData);
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate(ROUTES.DASH);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   };
 
   return (
@@ -143,6 +155,9 @@ function AuthPage() {
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
+          <Button onClick={demoSignIn} variant="contained">
+            Demo
+          </Button>
           <Link onClick={switchMode}>
             {isSignUp ? "Don't have and account? Sign Up" : "Already have an account Sign In"}
           </Link>
