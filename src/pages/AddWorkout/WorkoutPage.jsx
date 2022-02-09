@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 import { addWorkout } from "../../api/api";
 import { InputGroup, WorkoutFormStyled } from "./WorkoutPage.styled";
 import ExerciseForm from "./components/ExerciseForm/ExerciseForm";
-import { TextField, Button, Modal } from "@mui/material";
+import { TextField, Button, Modal, Slide } from "@mui/material";
 import Container from "../../components/StyledComponents/Container";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import { COLORS } from "../../constants/colors.constants";
@@ -84,10 +84,16 @@ export default function WorkoutForm() {
         {exercises?.length > 0 && renderExercises()}
         <Button onClick={() => setShowAddExercise(true)}>Add Exercise</Button>
       </WorkoutFormStyled>
-      <Modal open={showAddExercise} onClose={() => setShowAddExercise(false)} closeAfterTransition>
-        <ModalContainer>
-          <SearchBar addExercise={addExercise} closeModal={() => setShowAddExercise(false)} />
-        </ModalContainer>
+      <Modal
+        open={showAddExercise}
+        onClose={() => setShowAddExercise(false)}
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        closeAfterTransition>
+        <Slide direction="up" in={showAddExercise}>
+          <ModalContainer>
+            <SearchBar addExercise={addExercise} closeModal={() => setShowAddExercise(false)} />
+          </ModalContainer>
+        </Slide>
       </Modal>
     </Container>
   );

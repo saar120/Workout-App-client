@@ -39,7 +39,6 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
           label="Reps"
           autoComplete="off"
           name="reps"
-          autoFocus
           onKeyPress={checkValidKey}
           pattern="[0-9]*"
           placeholder={repsPlaceholder}
