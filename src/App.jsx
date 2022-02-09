@@ -1,6 +1,6 @@
 import React from "react";
 import { RecoilRoot } from "recoil";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Styles/muiTheme";
 import Navbar from "./components/Navbar/Navbar";
@@ -21,11 +21,13 @@ export default function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path={ROUTES.HOME} element={<AuthRoute />}>
-              <Route path={ROUTES.WORKOUT} element={<WorkoutPage />} />
+            <Route element={<AuthRoute />}>
+              <Route path={ROUTES.WORKOUT} exact element={<WorkoutPage />} />
               <Route path={ROUTES.DASH} element={<DashboardPage />} />
+              <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.DASH} />} />
             </Route>
             <Route path={ROUTES.AUTH} element={<AuthPage />} />
+            <Route path={ROUTES.TRAILING_STAR} element={<Navigate to={ROUTES.DASH} />} />
           </Routes>
         </Router>
       </ThemeProvider>

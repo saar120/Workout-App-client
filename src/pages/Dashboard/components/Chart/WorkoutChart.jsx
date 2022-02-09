@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "./Chart";
-import { FormControl, Select, InputLabel, MenuItem } from "@mui/material";
+import { FormControl, Select, InputLabel, MenuItem, Container } from "@mui/material";
 import { allUserExercisesTypes, userExerciseByName } from "../../../../api/api";
 import { COLORS } from "../../../../constants/colors.constants";
 
@@ -44,14 +44,14 @@ function WorkoutChart() {
   }, [currentName]);
 
   return (
-    <div
+    <Container
       style={{
         display: "flex",
         flexDirection: "column",
         padding: "1rem",
         justifyContent: "center",
         height: "clamp(500px,60vh,600px)",
-        width: "clamp(320px,70vw,1000px)",
+        width: "clamp(350px,70vw,1000px)",
         boxShadow: COLORS.boxShadow,
         backgroundColor: COLORS.light,
         borderRadius: "10px",
@@ -59,7 +59,7 @@ function WorkoutChart() {
       }}>
       {currentName && (
         <>
-          <div>
+          <Container sx={{ display: "flex", flexWrap: "nowrap" }}>
             <FormControl sx={{ width: "clamp(150px,50%,200px)" }}>
               <InputLabel id="userExercises">Exercises</InputLabel>
               <Select
@@ -89,11 +89,11 @@ function WorkoutChart() {
                 ))}
               </Select>
             </FormControl>
-          </div>
+          </Container>
           <Chart exerciseData={currentExercise} dataset={datasets[currentDataset]} />
         </>
       )}
-    </div>
+    </Container>
   );
 }
 

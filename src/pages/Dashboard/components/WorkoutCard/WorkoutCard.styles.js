@@ -8,7 +8,7 @@ export const WorkoutCardStyled = styled.div`
   background-color: ${COLORS.light};
   box-shadow: ${COLORS.boxShadow};
   border-radius: 10px;
-  width: clamp(300px, 50vw, 800px);
+  width: clamp(350px, 50vw, 800px);
   margin: auto;
 `;
 

@@ -9,6 +9,7 @@ const Container = styled.div`
   padding: 1rem;
   gap: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   min-height: 80vh;
   min-width: 80vw;
   position: relative;
