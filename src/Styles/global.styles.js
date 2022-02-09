@@ -29,6 +29,7 @@ background: transparent !important;
     align-items: center;
     justify-content: center;
   }
+  
 `;
 
 export default GlobalStyle;

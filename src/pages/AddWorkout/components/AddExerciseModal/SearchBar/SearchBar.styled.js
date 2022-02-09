@@ -16,22 +16,19 @@ const ResultsHolder = styled.div`
 `;
 
 const Result = styled.button`
-  && {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    min-height: 50px;
-    border-radius: 15px;
-    background-color: ${COLORS.light};
-    color: #121616;
-    border: 2px solid ${COLORS.primary};
-    cursor: pointer;
-    .MuiTouchRipple-child {
-      background-color: ${COLORS.secondary};
-    }
-  }
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 10px;
+  min-height: 50px;
+  border-radius: 10px;
+  background-color: ${COLORS.light};
+  color: ${COLORS.primary};
+  border: 2px solid ${COLORS.primary};
+  cursor: pointer;
+  background-position: center;
 `;
 
 export { ResultsHolder, Result };

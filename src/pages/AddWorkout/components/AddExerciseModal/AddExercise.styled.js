@@ -5,10 +5,10 @@ const ModalContainer = styled.div`
   top: 50%;
   position: fixed;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -50%);
   z-index: 1000;
-  width: clamp(300px, 30vw, 500px);
-  height: clamp(340px, 60vh, 500px);
+  width: clamp(340px, 30vw, 500px);
+  height: clamp(350px, 70vh, 600px);
   border-radius: 12px;
   display: flex;
   gap: 0.6rem;
@@ -17,6 +17,7 @@ const ModalContainer = styled.div`
   padding: 1.3rem;
   background-color: ${COLORS.light};
   box-shadow: ${COLORS.boxShadow};
+  outline: 0;
 `;
 
 export { ModalContainer };

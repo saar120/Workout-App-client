@@ -84,7 +84,7 @@ export default function WorkoutForm() {
         {exercises?.length > 0 && renderExercises()}
         <Button onClick={() => setShowAddExercise(true)}>Add Exercise</Button>
       </WorkoutFormStyled>
-      <Modal open={showAddExercise} onClose={() => setShowAddExercise(false)}>
+      <Modal open={showAddExercise} onClose={() => setShowAddExercise(false)} closeAfterTransition keepMounted>
         <ModalContainer>
           <SearchBar addExercise={addExercise} closeModal={() => setShowAddExercise(false)} />
         </ModalContainer>

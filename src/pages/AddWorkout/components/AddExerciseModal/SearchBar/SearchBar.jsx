@@ -54,11 +54,7 @@ function SearchBar({ addExercise, closeModal }) {
       } else {
         if (ex.primaryMuscles.join(" ").indexOf(searchTerm.toLowerCase()) === -1) continue;
       }
-      filtered.push(
-        <Result onClick={() => exerciseClick(ex.name)} key={ex.name}>
-          {ex.name}
-        </Result>
-      );
+      filtered.push(<Result key={ex.name}>{ex.name}</Result>);
     }
     return filtered;
   };
