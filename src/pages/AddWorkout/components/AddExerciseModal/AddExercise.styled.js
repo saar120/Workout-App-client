@@ -17,6 +17,7 @@ const ModalContainer = styled.div`
   padding: 1.3rem;
   background-color: ${COLORS.light};
   box-shadow: ${COLORS.boxShadow};
+  transition: 2s ease;
 `;
 
 const OverlayContainer = styled.div`

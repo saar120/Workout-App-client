@@ -28,7 +28,7 @@ export default function Chart({ exerciseData, dataset }) {
       borderWidth: isDesktop ? 4 : 3,
       pointBackgroundColor: COLORS.secondary,
       pointHoverRadius: 3,
-      tension: 0.2,
+      tension: 0.15,
     },
   ];
 

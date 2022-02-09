@@ -5,6 +5,12 @@ const GlobalStyle = createGlobalStyle`
 :root {
     --swiper-theme-color: ${COLORS.secondary} !important;
 }
+
+::-webkit-scrollbar {
+width: 0px !important;
+background: transparent !important; 
+}
+
   body {
     margin: 0;
     box-sizing: border-box;

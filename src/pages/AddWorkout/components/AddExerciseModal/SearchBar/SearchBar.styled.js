@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "../../../../../constants/colors.constants";
+import { Button } from "@mui/material";
 
 const ResultsHolder = styled.div`
   width: 100%;
@@ -15,20 +16,21 @@ const ResultsHolder = styled.div`
   }
 `;
 
-const Result = styled.div`
-  width: 90%;
-  min-height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border-radius: 15px;
-  background-color: ${COLORS.light};
-  color: #121616;
-  border: 2px solid ${COLORS.primary};
-  cursor: pointer;
-  &&:hover {
-    border-color: ${COLORS.secondary};
+const Result = styled(Button)`
+  && {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: ${COLORS.light};
+    color: #121616;
+    border: 2px solid ${COLORS.primary};
+    cursor: pointer;
+    .MuiTouchRipple-child {
+      background-color: ${COLORS.secondary};
+    }
   }
 `;
 
