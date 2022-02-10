@@ -16,10 +16,16 @@ export default function SetForm({ set, onChange, exIndex, setIndex }) {
   }
 
   const checkValidKey = (e) => {
-    //checks if key press is number
-    if (e.which < 48 || e.which > 57) {
-      e.preventDefault();
+    if (e.target.name === "weight") {
+      if (e.which === 46) {
+        if (e.target.value.indexOf(".") === -1) {
+          return true;
+        } else {
+          return e.preventDefault();
+        }
+      }
     }
+    if (e.which < 48 || e.which > 57) e.preventDefault();
   };
 
   const deleteSet = () => {
