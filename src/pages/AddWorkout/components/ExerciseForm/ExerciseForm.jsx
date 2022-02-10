@@ -51,7 +51,6 @@ export default function ExerciseForm({ exercise, exIndex }) {
       const updatedExercises = produce(exercises, (draft) => {
         draft[exIndex].sets[setIndex][name] = value;
       });
-      console.log(updatedExercises[exIndex].sets[setIndex]);
       setExercises(updatedExercises);
     };
 

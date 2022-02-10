@@ -6,6 +6,7 @@ const Title = styled.div`
   display: inline-block;
   color: ${COLORS.secondary};
   font-size: 1.2rem;
+  font-weight: 700;
   margin-right: 1rem;
   text-align: center;
 `;
