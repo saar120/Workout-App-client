@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import userState from "../../Recoil/atoms/userAtom";
 
-import { differenceInYears } from "date-fns";
-
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 
@@ -15,7 +13,6 @@ import { Button, Link } from "@mui/material";
 import Container from "../../components/StyledComponents/Container";
 import { AuthContainer, FormStyled, Header } from "./AuthPage.styles";
 import Input from "../../components/Input/Input";
-import DatePicker from "../../components/DatePicker/DatePicker";
 
 const initialFormState = {
   name: "",
@@ -29,17 +26,13 @@ function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialFormState);
-  const [date, setDate] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isSignUp && (!date || differenceInYears(new Date(), date) < 12)) {
-      return console.log("Need to be above 12");
-    }
     const action = isSignUp ? signIn : signUp;
     try {
-      const { data } = await action({ ...formData, birthDate: date });
+      const { data } = await action({ ...formData });
       setUser(data);
       localStorage.setItem("user", JSON.stringify(data));
       navigate(ROUTES.DASH);
@@ -124,13 +117,6 @@ function AuthPage() {
                 type="password"
                 value={formData.confirmPassword}
                 handleChange={handleChange}
-              />
-              <DatePicker
-                label="Birth Date"
-                value={date}
-                onChange={(newDate) => {
-                  setDate(newDate);
-                }}
               />
             </>
           )}

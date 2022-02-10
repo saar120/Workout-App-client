@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 import workoutsState from "../../Recoil/userWorkoutsAtom";
-import userState from "../../Recoil/atoms/userAtom";
 import { fetchUserWorkouts } from "../../api/api";
 import { duplicateExercises } from "./Dashboard.lib";
 import CalendarComponent from "../../components/Calendar/Calendar";
@@ -13,22 +12,23 @@ import Container from "../../components/StyledComponents/Container";
 import { DashboardPageStyled, WorkoutHolder } from "./Dashboard.Styles";
 import WorkoutChart from "./components/Chart/WorkoutChart";
 import exerciseState from "../../Recoil/atoms/exerciseAtom";
+import GoWorkout from "./components/GoWorkout/GoWorkout";
 
 function DashboardPage() {
-  const user = useRecoilValue(userState);
   const setExercises = useSetRecoilState(exerciseState);
   const [workouts, SetWorkouts] = useRecoilState(workoutsState);
   const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) return;
     const getWorkouts = async () => {
       try {
         const {
           data: { workouts: userWorkouts },
         } = await fetchUserWorkouts();
+        setLoading(false);
         SetWorkouts(userWorkouts);
       } catch (error) {
         console.log(error);
@@ -55,10 +55,13 @@ function DashboardPage() {
     navigate(ROUTES.WORKOUT);
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <Container>
       {workouts.length === 0 ? (
-        <h1>Loading</h1>
+        <GoWorkout />
       ) : (
         <DashboardPageStyled>
           {/* <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button> */}

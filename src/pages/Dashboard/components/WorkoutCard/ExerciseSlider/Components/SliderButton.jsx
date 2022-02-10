@@ -5,7 +5,9 @@ import { IconButton } from "@mui/material";
 
 const SliderButton = ({ next, swiperRef }) => {
   return (
-    <IconButton onClick={() => (next ? swiperRef.current.swiper.slideNext() : swiperRef.current.swiper.slidePrev())}>
+    <IconButton
+      sx={{ padding: "3px" }}
+      onClick={() => (next ? swiperRef.current.swiper.slideNext() : swiperRef.current.swiper.slidePrev())}>
       {next ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
     </IconButton>
   );

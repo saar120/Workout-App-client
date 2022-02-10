@@ -1,5 +1,5 @@
-import React from "react";
-import { Modal, Paper, TableContainer, Zoom } from "@mui/material";
+import React, { useEffect } from "react";
+import { Paper, TableContainer, Zoom, Dialog } from "@mui/material";
 import ExercisesTable from "./ExercisesTable";
 import { COLORS } from "../../../../constants/colors.constants";
 
@@ -12,17 +12,33 @@ const tableSx = {
   boxShadow: COLORS.boxShadow2,
 };
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Zoom ref={ref} {...props} />;
+});
+
 function FullWorkout({ open, closeModal, workout }) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+    //eslint-disable-next-line
+  }, []);
+
   return (
-    <Modal open={open} onClose={closeModal} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <Zoom in={open}>
-        <TableContainer component={Paper} sx={tableSx}>
-          {workout.exercises.map((ex) => (
-            <ExercisesTable key={ex._id} exercise={ex} />
-          ))}
-        </TableContainer>
-      </Zoom>
-    </Modal>
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      onClose={closeModal}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "15px" }}>
+      <TableContainer component={Paper} sx={tableSx}>
+        {workout.exercises.map((ex) => (
+          <ExercisesTable key={ex._id} exercise={ex} />
+        ))}
+      </TableContainer>
+    </Dialog>
   );
 }
 
