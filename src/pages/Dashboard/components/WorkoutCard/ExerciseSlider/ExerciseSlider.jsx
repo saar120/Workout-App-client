@@ -29,7 +29,7 @@ function ExerciseSlider({ exercises }) {
         dynamicBullets: true,
       }}>
       {exercises.map((exercise) => (
-        <SwiperSlide key={exercise._id} onClick={() => console.log(exercise)}>
+        <SwiperSlide key={exercise._id}>
           <SmallExercise exercise={exercise} />
         </SwiperSlide>
       ))}

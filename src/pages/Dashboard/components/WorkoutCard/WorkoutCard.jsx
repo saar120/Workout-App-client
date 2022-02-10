@@ -6,12 +6,23 @@ import ExerciseSlider from "./ExerciseSlider/ExerciseSlider";
 import { Button, ButtonGroup, Menu, MenuItem } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { COLORS } from "../../../../constants/colors.constants";
+import FullWorkoutModal from "../FullWorkout/FullWorkout";
 
 function WorkoutCard({ workout, isLatest, redoHandler }) {
+  const [showModal, setShowModal] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState(null);
 
   const handleMenuClick = ({ currentTarget }) => {
     setMenuAnchor(currentTarget);
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+    setMenuAnchor(null);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -35,10 +46,10 @@ function WorkoutCard({ workout, isLatest, redoHandler }) {
         <ExerciseSlider exercises={workout.exercises} />
       </ExercisesHolder>
       <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={() => setMenuAnchor(null)}>
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={openModal}>View Workout</MenuItem>
+        <MenuItem>Delete</MenuItem>
       </Menu>
+      <FullWorkoutModal open={showModal} closeModal={closeModal} workout={workout} />
     </WorkoutCardStyled>
   );
 }
