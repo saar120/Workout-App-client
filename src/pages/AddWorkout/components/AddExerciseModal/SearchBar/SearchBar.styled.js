@@ -5,6 +5,7 @@ const ResultsHolder = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 400px;
   gap: 10px;
   align-items: center;
   overflow: hidden;

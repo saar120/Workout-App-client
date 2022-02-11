@@ -3,15 +3,18 @@ import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/mater
 import { ResultsHolder, Result } from "./SearchBar.styled";
 import { fetchExercises } from "../../../../../api/api";
 import muscles from "../../../../../mock-data/muscles.json";
+import Spinner from "../../../../../components/Spinner/Spinner";
 
 function SearchBar({ addExercise, closeModal }) {
   const [category, setCategory] = useState("name");
   const [searchTerm, setSearchTerm] = useState("");
   const [exercises, setExercises] = useState([]);
   const [textInput, setTextInput] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("exercises"))) {
+      setLoading(false);
       return setExercises(JSON.parse(localStorage.getItem("exercises")));
     }
     const getExercises = async () => {
@@ -22,6 +25,7 @@ function SearchBar({ addExercise, closeModal }) {
       } catch (err) {
         console.log(err);
       }
+      setLoading(false);
     };
     getExercises();
   }, []);
@@ -92,7 +96,15 @@ function SearchBar({ addExercise, closeModal }) {
           </Select>
         </FormControl>
       )}
-      <ResultsHolder>{renderFilteredExercises()}</ResultsHolder>
+      <ResultsHolder>
+        {loading && (
+          <div
+            style={{ height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Spinner small />
+          </div>
+        )}
+        {renderFilteredExercises()}
+      </ResultsHolder>
     </>
   );
 }

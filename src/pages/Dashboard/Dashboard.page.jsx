@@ -13,6 +13,7 @@ import { DashboardPageStyled, WorkoutHolder } from "./Dashboard.Styles";
 import WorkoutChart from "./components/Chart/WorkoutChart";
 import exerciseState from "../../Recoil/atoms/exerciseAtom";
 import GoWorkout from "./components/GoWorkout/GoWorkout";
+import Spinner from "../../components/Spinner/Spinner";
 
 function DashboardPage() {
   const setExercises = useSetRecoilState(exerciseState);
@@ -56,7 +57,11 @@ function DashboardPage() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
   }
   return (
     <Container>
