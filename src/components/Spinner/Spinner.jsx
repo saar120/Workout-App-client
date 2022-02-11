@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const SpinnerStyled = styled.div`
   display: flex;
-  height: ${({ small }) => (small ? 100 : 250)}px;
-  width: ${({ small }) => (small ? 100 : 250)}px;
+  height: ${({ small }) => (small ? 30 : 250)}px;
+  width: ${({ small }) => (small ? 30 : 250)}px;
   justify-content: center;
   align-items: center;
   animation: spin 0.8s linear infinite;
@@ -22,10 +22,11 @@ const SpinnerStyled = styled.div`
   }
 `;
 
-function Spinner({ small }) {
+function Spinner({ small, white }) {
+  const src = white ? "/logo512white.png" : "/logo512.png";
   return (
     <SpinnerStyled small={small ? true : false}>
-      <img src="/logo512.png" alt="dumbbell spinner" />
+      <img src={src} alt="dumbbell spinner" />
     </SpinnerStyled>
   );
 }

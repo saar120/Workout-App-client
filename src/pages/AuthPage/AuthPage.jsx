@@ -13,6 +13,7 @@ import { Button, Link } from "@mui/material";
 import Container from "../../components/StyledComponents/Container";
 import { AuthContainer, FormStyled, Header } from "./AuthPage.styles";
 import Input from "../../components/Input/Input";
+import Spinner from "../../components/Spinner/Spinner";
 
 const initialFormState = {
   name: "",
@@ -26,18 +27,22 @@ function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialFormState);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const action = isSignUp ? signIn : signUp;
     try {
       const { data } = await action({ ...formData });
       setUser(data);
       localStorage.setItem("user", JSON.stringify(data));
+      setLoading(false);
       navigate(ROUTES.DASH);
     } catch (err) {
       console.log(err.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -122,7 +127,7 @@ function AuthPage() {
           )}
 
           <Button fullWidth variant="contained" type="submit" onClick={handleSubmit}>
-            {isSignUp ? "Sign In" : "Sign Up"}
+            {loading ? <Spinner small white /> : isSignUp ? "Sign In" : "Sign Up"}
           </Button>
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
