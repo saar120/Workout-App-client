@@ -3,6 +3,7 @@ import Chart from "./Chart";
 import { FormControl, Select, InputLabel, MenuItem, Container } from "@mui/material";
 import { allUserExercisesTypes, userExerciseByName } from "../../../../api/api";
 import { COLORS } from "../../../../constants/colors.constants";
+import ErrorMessage from "../../../../components/ErrorMessage/ErrorMessage";
 
 const datasets = [
   { label: "1RM", value: "rm1", des: "KG" },
@@ -15,6 +16,7 @@ function WorkoutChart() {
   const [currentName, setCurrentName] = useState("");
   const [currentExercise, setCurrentExercise] = useState([]);
   const [currentDataset, setCurrentDataset] = useState(0);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getAllUserExercisesTypes = async () => {
@@ -23,7 +25,7 @@ function WorkoutChart() {
         setUserExercises(data);
         setCurrentName(data[0]);
       } catch (error) {
-        console.log(error);
+        setError(error.response.data.message);
       }
     };
     getAllUserExercisesTypes();
@@ -37,7 +39,7 @@ function WorkoutChart() {
         const { data } = await userExerciseByName({ exName });
         setCurrentExercise(data);
       } catch (error) {
-        console.log(error);
+        setError(error.response.data.message);
       }
     };
     getExercisesData();
@@ -93,6 +95,7 @@ function WorkoutChart() {
           <Chart exerciseData={currentExercise} dataset={datasets[currentDataset]} />
         </>
       )}
+      <ErrorMessage open={error} message={error} onClose={() => setError("")} />
     </Container>
   );
 }

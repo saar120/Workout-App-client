@@ -14,6 +14,7 @@ import Container from "../../components/StyledComponents/Container";
 import { AuthContainer, FormStyled, Header } from "./AuthPage.styles";
 import Input from "../../components/Input/Input";
 import Spinner from "../../components/Spinner/Spinner";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const initialFormState = {
   name: "",
@@ -29,10 +30,11 @@ function AuthPage() {
   const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
     const action = isSignUp ? signIn : signUp;
     try {
       const { data } = await action({ ...formData });
@@ -41,7 +43,7 @@ function AuthPage() {
       setLoading(false);
       navigate(ROUTES.DASH);
     } catch (err) {
-      console.log(err.response.data.message);
+      setError(err.response.data.message);
       setLoading(false);
     }
   };
@@ -54,13 +56,13 @@ function AuthPage() {
       localStorage.setItem("user", JSON.stringify({ result, token }));
       navigate(ROUTES.DASH);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
   const googleFailure = async (error) => {
     console.log(error);
-    console.log("google sign in failed");
+    setError("google sign in failed");
   };
 
   const handleChange = ({ target }) => {
@@ -92,7 +94,7 @@ function AuthPage() {
     <Container>
       <AuthContainer>
         <Header>{isSignUp ? "Sign In" : "Sign Up"}</Header>
-        <FormStyled>
+        <FormStyled onSubmit={handleSubmit}>
           {!isSignUp && (
             <>
               <Input
@@ -126,7 +128,7 @@ function AuthPage() {
             </>
           )}
 
-          <Button fullWidth variant="contained" type="submit" onClick={handleSubmit}>
+          <Button fullWidth variant="contained" type="submit">
             {loading ? <Spinner small white /> : isSignUp ? "Sign In" : "Sign Up"}
           </Button>
           <GoogleLogin
@@ -154,6 +156,7 @@ function AuthPage() {
           </Link>
         </FormStyled>
       </AuthContainer>
+      <ErrorMessage open={error} onClose={() => setError("")} message={error} />
     </Container>
   );
 }

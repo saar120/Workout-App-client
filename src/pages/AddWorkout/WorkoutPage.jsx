@@ -14,6 +14,7 @@ import DatePicker from "../../components/DatePicker/DatePicker";
 import { COLORS } from "../../constants/colors.constants";
 import { ModalContainer } from "./components/AddExerciseModal/AddExercise.styled";
 import SearchBar from "./components/AddExerciseModal/SearchBar/SearchBar";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function WorkoutForm() {
   const setWorkouts = useSetRecoilState(workoutsState);
@@ -21,6 +22,7 @@ export default function WorkoutForm() {
   const [workoutName, setWorkoutName] = useState("");
   const [showAddExercise, setShowAddExercise] = useState(false);
   const [workoutDate, setWorkoutDate] = useState(new Date());
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -51,7 +53,7 @@ export default function WorkoutForm() {
       resetWorkout();
       navigate(ROUTES.DASH);
     } catch (err) {
-      console.log(err.response.data.message);
+      setError(err.response.data.message);
     }
   };
 
@@ -95,6 +97,7 @@ export default function WorkoutForm() {
           </ModalContainer>
         </Slide>
       </Modal>
+      <ErrorMessage open={!!error} onClose={() => setError("")} message={error} />
     </Container>
   );
 }

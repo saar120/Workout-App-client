@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const SpinnerStyled = styled.div`
   display: flex;
-  height: ${({ small }) => (small ? 30 : 250)}px;
-  width: ${({ small }) => (small ? 30 : 250)}px;
+  height: ${({ small }) => (small ? 50 : 250)}px;
+  width: ${({ small }) => (small ? 50 : 250)}px;
   justify-content: center;
   align-items: center;
   animation: spin 0.8s linear infinite;

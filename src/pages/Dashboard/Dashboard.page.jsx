@@ -14,12 +14,14 @@ import WorkoutChart from "./components/Chart/WorkoutChart";
 import exerciseState from "../../Recoil/atoms/exerciseAtom";
 import GoWorkout from "./components/GoWorkout/GoWorkout";
 import Spinner from "../../components/Spinner/Spinner";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 function DashboardPage() {
   const setExercises = useSetRecoilState(exerciseState);
   const [workouts, SetWorkouts] = useRecoilState(workoutsState);
   const [currentWorkoutIndex, setCurrentWorkoutIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,6 +34,7 @@ function DashboardPage() {
         setLoading(false);
         SetWorkouts(userWorkouts);
       } catch (error) {
+        setError(error.response.data.message);
         console.log(error);
       }
     };
@@ -78,6 +81,7 @@ function DashboardPage() {
           <WorkoutChart />
         </DashboardPageStyled>
       )}
+      <ErrorMessage open={error} message={error} onClose={() => setError("")} />
     </Container>
   );
 }
