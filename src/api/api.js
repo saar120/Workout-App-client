@@ -25,4 +25,15 @@ const allUserExercisesTypes = () => workoutTrackerAPI.get("/workouts/userExercis
 
 const userExerciseByName = (data) => workoutTrackerAPI.post("/workouts/exerciseByName", data);
 
-export { fetchExercises, signUp, signIn, addWorkout, fetchUserWorkouts, allUserExercisesTypes, userExerciseByName };
+const deleteWorkout = (data) => workoutTrackerAPI.post("/workouts/delete", data);
+
+export {
+  fetchExercises,
+  signUp,
+  signIn,
+  addWorkout,
+  fetchUserWorkouts,
+  allUserExercisesTypes,
+  userExerciseByName,
+  deleteWorkout,
+};

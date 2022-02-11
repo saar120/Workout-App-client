@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 import workoutsState from "../../Recoil/userWorkoutsAtom";
-import { fetchUserWorkouts } from "../../api/api";
+import { fetchUserWorkouts, deleteWorkout } from "../../api/api";
 import { duplicateExercises } from "./Dashboard.lib";
 import CalendarComponent from "../../components/Calendar/Calendar";
 import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
@@ -59,6 +59,16 @@ function DashboardPage() {
     navigate(ROUTES.WORKOUT);
   };
 
+  const deleteHandler = async (workoutID) => {
+    try {
+      const { data: newWorkouts } = await deleteWorkout({ workoutID });
+      SetWorkouts(newWorkouts);
+      setError("Workout deleted");
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
+
   if (loading) {
     return (
       <Container>
@@ -74,7 +84,12 @@ function DashboardPage() {
         <DashboardPageStyled>
           {/* <Button onClick={() => setCurrentWorkoutIndex(0)}>Show Latest</Button> */}
           <WorkoutHolder>
-            <WorkoutCard workout={workouts[currentWorkoutIndex]} isLatest={isLatest()} redoHandler={redoHandler} />
+            <WorkoutCard
+              workout={workouts[currentWorkoutIndex]}
+              isLatest={isLatest()}
+              redoHandler={redoHandler}
+              deleteHandler={deleteHandler}
+            />
             <WorkoutSlider workouts={workouts} setCurrentWorkout={(index) => setCurrentWorkoutIndex(index)} />
           </WorkoutHolder>
           <CalendarComponent datesToShow={getWorkoutDates()} />

@@ -8,7 +8,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { COLORS } from "../../../../constants/colors.constants";
 import FullWorkoutModal from "../FullWorkout/FullWorkout";
 
-function WorkoutCard({ workout, isLatest, redoHandler }) {
+function WorkoutCard({ workout, isLatest, redoHandler, deleteHandler }) {
   const [showModal, setShowModal] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState(null);
 
@@ -23,6 +23,11 @@ function WorkoutCard({ workout, isLatest, redoHandler }) {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const handleDelete = () => {
+    setMenuAnchor(null);
+    deleteHandler(workout._id);
   };
 
   return (
@@ -47,7 +52,7 @@ function WorkoutCard({ workout, isLatest, redoHandler }) {
       </ExercisesHolder>
       <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={() => setMenuAnchor(null)}>
         <MenuItem onClick={openModal}>View Workout</MenuItem>
-        <MenuItem>Delete</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
       <FullWorkoutModal open={showModal} closeModal={closeModal} workout={workout} />
     </WorkoutCardStyled>
