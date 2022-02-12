@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { ResultsHolder, Result } from "./SearchBar.styled";
 import { fetchExercises } from "../../../../../api/api";
 import muscles from "../../../../../mock-data/muscles.json";
 import Spinner from "../../../../../components/Spinner/Spinner";
 
-function SearchBar({ addExercise, closeModal }) {
-  const [category, setCategory] = useState("name");
-  const [searchTerm, setSearchTerm] = useState("");
+function SearchBar({ addExercise, closeModal, muscle }) {
+  const [category, setCategory] = useState(muscle ? "primaryMuscles" : "name");
+  const [searchTerm, setSearchTerm] = useState(muscle || "");
   const [exercises, setExercises] = useState([]);
   const [textInput, setTextInput] = useState("");
   const [loading, setLoading] = useState(true);
+  const didMountRef = useRef(false);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("exercises"))) {
@@ -31,7 +32,14 @@ function SearchBar({ addExercise, closeModal }) {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSearchTerm(textInput), 200);
+    let timer;
+    if (didMountRef.current) {
+      //if the component has mounted
+      timer = setTimeout(() => setSearchTerm(textInput), 200);
+    } else {
+      //if the component has not mounted
+      didMountRef.current = true; //set the flag to true
+    }
     return () => {
       clearTimeout(timer);
     };

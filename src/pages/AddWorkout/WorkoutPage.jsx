@@ -26,8 +26,9 @@ export default function WorkoutForm() {
   const [workoutDate, setWorkoutDate] = useState(new Date());
   const [error, setError] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestedMuscle, setSuggestedMuscle] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -37,7 +38,6 @@ export default function WorkoutForm() {
         const { data } = await getSuggestedMuscles();
         setSuggestions(data);
       } catch (err) {
-        console.log(err.response.data.message);
         setSuggestions([]);
       }
       setLoading(false);
@@ -52,6 +52,7 @@ export default function WorkoutForm() {
 
   const addExercise = (exercise) => {
     const newExercise = { id: uuid(), name: exercise, sets: [{ id: uuid(), reps: "", weight: "" }] };
+    setSuggestedMuscle("");
     setExercises([...exercises, newExercise]);
   };
 
@@ -74,6 +75,17 @@ export default function WorkoutForm() {
     } catch (err) {
       setError(err.response.data.message);
     }
+  };
+
+  const muscleClick = (muscle) => {
+    setSuggestedMuscle(muscle);
+    setShowSuggestions(false);
+    setShowAddExercise(true);
+  };
+
+  const workoutModalClose = () => {
+    setShowAddExercise(false);
+    setSuggestedMuscle("");
   };
 
   if (loading)
@@ -120,16 +132,21 @@ export default function WorkoutForm() {
       </WorkoutFormStyled>
       <Modal
         open={showAddExercise}
-        onClose={() => setShowAddExercise(false)}
+        onClose={workoutModalClose}
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
         closeAfterTransition>
         <Slide direction="up" in={showAddExercise}>
           <ModalContainer>
-            <SearchBar addExercise={addExercise} closeModal={() => setShowAddExercise(false)} />
+            <SearchBar addExercise={addExercise} closeModal={workoutModalClose} muscle={suggestedMuscle} />
           </ModalContainer>
         </Slide>
       </Modal>
-      <Suggestions open={showSuggestions} close={() => setShowSuggestions(false)} suggestions={suggestions} />
+      <Suggestions
+        open={showSuggestions}
+        close={() => setShowSuggestions(false)}
+        suggestions={suggestions}
+        muscleClick={muscleClick}
+      />
       <ErrorMessage open={!!error} onClose={() => setError("")} message={error} />
     </Container>
   );
