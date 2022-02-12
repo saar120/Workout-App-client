@@ -27,7 +27,7 @@ const userExerciseByName = (data) => workoutTrackerAPI.post("/workouts/exerciseB
 
 const deleteWorkout = (data) => workoutTrackerAPI.post("/workouts/delete", data);
 
-const getSuggestedMuscles = () => workoutTrackerAPI.get("/workouts/suggestedMuscles");
+const getSuggestedMuscles = () => workoutTrackerAPI.get("/workouts/suggestMuscle");
 
 export {
   fetchExercises,
