@@ -13,7 +13,7 @@ const SmallWorkout = styled.div`
   height: 60px;
   border-radius: 10px;
   background-color: ${COLORS.light};
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+  box-shadow: ${COLORS.boxShadow3};
   display: flex;
   flex-direction: column;
   gap: 0.1rem;

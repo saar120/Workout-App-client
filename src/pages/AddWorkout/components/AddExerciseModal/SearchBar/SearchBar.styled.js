@@ -26,10 +26,10 @@ const Result = styled.button`
   min-height: 50px;
   border-radius: 10px;
   background-color: ${COLORS.light};
+  border: none;
   color: ${COLORS.primary};
-  border: 2px solid ${COLORS.primary};
+  box-shadow: ${COLORS.boxShadow3};
   cursor: pointer;
-  background-position: center;
 `;
 
 export { ResultsHolder, Result };

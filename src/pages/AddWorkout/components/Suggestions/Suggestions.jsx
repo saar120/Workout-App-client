@@ -18,19 +18,17 @@ const Container = styled.div`
 `;
 
 const Text = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
 `;
 
 const Muscle = styled.div`
   font-size: 1rem;
-  font-weight: bold;
   text-align: center;
   background-color: ${COLORS.light};
   color: ${COLORS.primary};
   padding: 7px;
-  box-shadow: ${COLORS.boxShadow2};
-  border-radius: 0.5rem;
+  box-shadow: ${COLORS.boxShadow3};
   cursor: pointer;
 `;
 
