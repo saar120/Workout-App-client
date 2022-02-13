@@ -62,6 +62,7 @@ function DashboardPage() {
   const deleteHandler = async (workoutID) => {
     try {
       const { data: newWorkouts } = await deleteWorkout({ workoutID });
+      setCurrentWorkoutIndex(0);
       SetWorkouts(newWorkouts);
       setError("Workout deleted");
     } catch (error) {
